@@ -42,6 +42,11 @@ public class Agent : MonoBehaviour
         myAction = action;
     }
 
+    public void CheckStartTime()
+    {
+        startTime = Time.time;
+    }
+
     void Update()
     {
         if (destination == Vector3.zero) return;
@@ -55,8 +60,7 @@ public class Agent : MonoBehaviour
             Debug.Log("µµÂøÇÔ");
             myAction(new Ticket(elapsedTime, this.gameObject.name));
 
-            transform.position = orignalPos;
-            agent.SetDestination(orignalPos);
+             agent.Warp(orignalPos);
         }
     }
 }

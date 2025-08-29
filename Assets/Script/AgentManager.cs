@@ -14,16 +14,22 @@ public class AgentManager: MonoBehaviour
     {
         agentQueue.Clear();
 
-        foreach (var item in agents)
+        StartCoroutine(StartOneByOne(pos));
+    }
+
+    IEnumerator StartOneByOne(Vector3 pos)
+    {
+        foreach (var agent in agents)
         {
             float speed = Random.Range(10f, 50f);
-            Vector3 des = pos;
-            item.Setup(speed, pos);
-            item.CallbackAction(MyAction);
+            agent.Setup(speed, pos);
+            agent.CheckStartTime();
+            agent.CallbackAction(CollectAgets);
+            yield return null;
         }
     }
 
-    private void MyAction(Ticket obj)
+    private void CollectAgets(Ticket obj)
     {
         agentQueue.Enqueue(obj);
 
