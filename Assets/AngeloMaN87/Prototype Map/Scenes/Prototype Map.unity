@@ -1244,6 +1244,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   uiDocument: {fileID: 634655251}
+  Animal1Img: {fileID: 21300000, guid: e7bc2d5fbca2d9a408f27abf48b8f979, type: 3}
+  Animal2Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Animal3Img: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Animal4Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Animal5Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Animal6Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Animal7Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &634655251
 MonoBehaviour:
   m_ObjectHideFlags: 0
