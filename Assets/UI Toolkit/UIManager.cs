@@ -1,12 +1,17 @@
-using System;
-using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 using Label = UnityEngine.UIElements.Label;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
+    public UnityEvent OnGamePlayStartEvent;
+
+    public float LeftStartTime = Mathf.Clamp(3f, 0f, 3f);
+
+    //UI Document 등록
+    #region
     [SerializeField] private UIDocument uiDocument;
     private VisualElement root;
 
@@ -20,10 +25,10 @@ public class UIManager : MonoBehaviour
     private VisualElement Bot;
     private Button ConfirmButton, StartButton;
 
-    private Sprite playerImg;
-    private Sprite AIImg;
-
+    private Sprite playerImg, AIImg;
     public Sprite Animal1Img, Animal2Img, Animal3Img, Animal4Img, Animal5Img, Animal6Img, Animal7Img;
+    #endregion
+
 
     private void Awake()
     {
@@ -54,7 +59,6 @@ public class UIManager : MonoBehaviour
         ConfirmButton = root.Q<Button>("Confirm");
         StartButton = root.Q<Button>("GameStart");
 
-
         Animal1.clicked += Animal1_clicked;
         Animal2.clicked += Animal2_clicked;
         Animal3.clicked += Animal3_clicked;
@@ -72,7 +76,6 @@ public class UIManager : MonoBehaviour
         root = uiDocument.rootVisualElement;
         root.AddToClassList("DownState");
         root.AddToClassList("NomalState");
-
         Animal1.style.backgroundImage = new StyleBackground(Animal1Img.texture);
         Animal2.style.backgroundImage = new StyleBackground(Animal2Img.texture);
         Animal3.style.backgroundImage = new StyleBackground(Animal3Img.texture);
@@ -80,42 +83,75 @@ public class UIManager : MonoBehaviour
         Animal5.style.backgroundImage = new StyleBackground(Animal5Img.texture);
         Animal6.style.backgroundImage = new StyleBackground(Animal6Img.texture);
         Animal7.style.backgroundImage = new StyleBackground(Animal7Img.texture);
+        initialize();
     }
 
+    public void initialize()
+    {
+        LeftStartTime = 3f;
+        root.AddToClassList("NomalState");
+        Top1.style.backgroundImage = null;
+        PlayerLabel.text = null;
+
+        AnimamalButtonEnableTrue();
+        ConfirmButton.visible = false;
+        StartButton.visible = false;
+    }
+
+    private void Update()
+    {
+        if (LeftStartTime > 0)
+        {
+            LeftStartTime -= Time.deltaTime;
+            //countdownText.text = Mathf.Ceil(LeftStartTime).ToString(); // 소수점 올림해서 3,2,1 표시
+        }
+        else
+        {
+            //countdownText.text = "Start!";
+            // 여기서 게임 시작 로직을 넣을 수 있어요
+        }
+    }
     // Animal 1~7 Bttun Clicked Event
-    #region
+        #region
     private void Animal1_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal1Img);
         PlayerLabel.text = "Animal01";
     }
     private void Animal2_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal2Img);
         PlayerLabel.text = "Animal02";
     }
     private void Animal3_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal3Img);
         PlayerLabel.text = "Animal03";
     }
     private void Animal4_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal4Img);
         PlayerLabel.text = "Animal04";
     }
     private void Animal5_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal5Img);
         PlayerLabel.text = "Animal05";
     }
     private void Animal6_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal6Img);
         PlayerLabel.text = "Animal06";
     }
     private void Animal7_clicked()
     {
+        ConfirmButton.visible = true;
         Top1.style.backgroundImage = new StyleBackground(Animal7Img);
         PlayerLabel.text = "Animal07";
     }
@@ -123,18 +159,50 @@ public class UIManager : MonoBehaviour
 
     private void ConfirmButton_clicked()
     {
+        AnimamalButtonEnableFalse();
+        ConfirmButton.visible = false;
         AIConfirm();
     }
 
     private void AIConfirm()
     {
-        int AITarget = Random.Range(1, 7);
-        Top3.style.backgroundImage = new StyleBackground();
-        AILabel.text = "AITarget";
+        new WaitForSeconds(1f);
+        //ai가 내가 고르지 않은 동물 중 하나를 고른다.
+        AILabel.text="Animal: " + Random.Range(1, 7).ToString();//확인용
+        new WaitForSeconds(1f);
+        StartButton.visible = true;
     }
 
     private void StartButton_clicked()
     {
         root.RemoveFromClassList("NomalState");
+        new WaitForSeconds(3f);
+        OnGamePlayStartEvent?.Invoke();
+    }
+
+    public void OnGamePlayEndEvent()
+    {
+        initialize();
+    }
+
+    public void AnimamalButtonEnableTrue()
+    {
+        Animal1.enabledSelf = true;
+        Animal2.enabledSelf = true;
+        Animal3.enabledSelf = true;
+        Animal4.enabledSelf = true;
+        Animal5.enabledSelf = true;
+        Animal6.enabledSelf = true;
+        Animal7.enabledSelf = true;
+    }
+    public void AnimamalButtonEnableFalse()
+    {
+        Animal1.enabledSelf = false;
+        Animal2.enabledSelf = false;
+        Animal3.enabledSelf = false;
+        Animal4.enabledSelf = false;
+        Animal5.enabledSelf = false;
+        Animal6.enabledSelf = false;
+        Animal7.enabledSelf = false;
     }
 }

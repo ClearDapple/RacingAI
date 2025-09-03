@@ -11,28 +11,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform endPointPos;
 
 
-    void Update()
+    public void OnGamePlayEvent()
     {
-        if(Input.GetMouseButtonDown(1))
-        {
-            agentManager.StartToRun(endPointPos.position);
-        }
+        agentManager.StartToRun(endPointPos.position);
     }
 }
 /*
 if (Input.GetMouseButtonDown(0))
 {
-    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-    RaycastHit hit;
+RaycastHit hit;
 
-    if (Physics.Raycast(ray, out hit))
-    {
-        Vector3 pos = hit.point;
+if (Physics.Raycast(ray, out hit))
+{
+    Vector3 pos = hit.point;
 
-        pos.y = 0f;
+    pos.y = 0f;
 
-        agentManager.StartToRun(pos);
-    }
+    agentManager.StartToRun(pos);
+}
 }
 */

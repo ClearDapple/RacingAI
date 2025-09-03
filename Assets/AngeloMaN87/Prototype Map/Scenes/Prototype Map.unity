@@ -429,6 +429,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b65e330d834484abe23224bcb856c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgentManager
+  OnGamePlayEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 634655250}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnGamePlayEndEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   agents:
   - {fileID: 167527020}
   - {fileID: 1801397084}
@@ -1243,14 +1258,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7e2d10b74d3cf46ba54af96b787a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  OnGamePlayStartEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1737072158}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnGamePlayEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LeftStartTime: 3
   uiDocument: {fileID: 634655251}
-  Animal1Img: {fileID: 21300000, guid: e7bc2d5fbca2d9a408f27abf48b8f979, type: 3}
-  Animal2Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  Animal3Img: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  Animal4Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  Animal5Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  Animal6Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  Animal7Img: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Animal1Img: {fileID: 21300000, guid: 1e23bd180e8a40e49bd0176957e851d8, type: 3}
+  Animal2Img: {fileID: 21300000, guid: ac323f0c393a3734e8dc2f156ce061e7, type: 3}
+  Animal3Img: {fileID: 21300000, guid: 5a5927ec7a50bf44296594e49d1c1f3f, type: 3}
+  Animal4Img: {fileID: 21300000, guid: 874648e79e582c348b6a2fda27e2a5b6, type: 3}
+  Animal5Img: {fileID: 21300000, guid: 2997f8be5ee49cd4c8c3576b59eec01c, type: 3}
+  Animal6Img: {fileID: 21300000, guid: 79259ed22a7407842a979a20128428a7, type: 3}
+  Animal7Img: {fileID: 21300000, guid: a9b46ef31faaf8441bd2b74057bfe7d8, type: 3}
 --- !u!114 &634655251
 MonoBehaviour:
   m_ObjectHideFlags: 0
