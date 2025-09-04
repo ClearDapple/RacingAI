@@ -10,54 +10,74 @@ public class UIManager : MonoBehaviour
 
     public float LeftStartTime = Mathf.Clamp(3f, 0f, 3f);
 
-    //UI Document 등록
-    #region
     [SerializeField] private UIDocument uiDocument;
+
     private VisualElement root;
 
-    private VisualElement Top;
-    private VisualElement Top1, Top2, Top3;
+    // AnimalConfirmPage 등록
+    #region
+    private VisualElement root01;
+
+    private VisualElement Top1;
+    private VisualElement Top11, Top12, Top13;
     private Label PlayerLabel, AILabel;
 
-    private VisualElement Mid;
+    private VisualElement Mid1;
     private Button Animal1, Animal2, Animal3, Animal4, Animal5, Animal6, Animal7;
 
-    private VisualElement Bot;
-    private Button ConfirmButton, StartButton;
+    private VisualElement Bot1;
+    private Button ConfirmButton1, StartButton;
 
     private Sprite playerImg, AIImg;
     public Sprite Animal1Img, Animal2Img, Animal3Img, Animal4Img, Animal5Img, Animal6Img, Animal7Img;
     #endregion
 
+    // WinLoseNoticePage 등록
+    #region
+    private VisualElement root02;
+    private VisualElement WinLosePopUp;
+
+    private VisualElement Top2;
+    private Label TitleLabel;
+
+    private VisualElement Mid2;
+    private Label MainTextLabel;
+
+    private VisualElement Bot2;
+    private Button ConfirmButton2;
+    #endregion
+
 
     private void Awake()
     {
-        //UI Document 연결
-        #region
-        root = uiDocument.rootVisualElement;
+        root = uiDocument.rootVisualElement.Q<VisualElement>("MainRoot");
+        root01 = root.Q<VisualElement>("AnimalConfirmPage");
+        root02 = root.Q<VisualElement>("WinLoseNoticePage");
 
+        //AnimalConfirmPage 연결
+        #region
         // Top Section
-        Top = root.Q<VisualElement>("Top");
-        Top1 = root.Q<VisualElement>("Top1");
-        Top2 = root.Q<VisualElement>("Top2");
-        Top3 = root.Q<VisualElement>("Top3");
-        PlayerLabel = root.Q<Label>("PlayerLabel");
-        AILabel = root.Q<Label>("AILabel");
+        Top1 = root01.Q<VisualElement>("Top");
+        Top11 = root01.Q<VisualElement>("Top1");
+        Top12 = root01.Q<VisualElement>("Top2");
+        Top13 = root01.Q<VisualElement>("Top3");
+        PlayerLabel = root01.Q<Label>("PlayerLabel");
+        AILabel = root01.Q<Label>("AILabel");
         
         // Mid Section
-        Mid = root.Q<VisualElement>("Mid");
-        Animal1 = root.Q<Button>("Animal1");
-        Animal2 = root.Q<Button>("Animal2");
-        Animal3 = root.Q<Button>("Animal3");
-        Animal4 = root.Q<Button>("Animal4");
-        Animal5 = root.Q<Button>("Animal5");
-        Animal6 = root.Q<Button>("Animal6");
-        Animal7 = root.Q<Button>("Animal7");
+        Mid1 = root01.Q<VisualElement>("Mid");
+        Animal1 = root01.Q<Button>("Animal1Button");
+        Animal2 = root01.Q<Button>("Animal2Button");
+        Animal3 = root01.Q<Button>("Animal3Button");
+        Animal4 = root01.Q<Button>("Animal4Button");
+        Animal5 = root01.Q<Button>("Animal5Button");
+        Animal6 = root01.Q<Button>("Animal6Button");
+        Animal7 = root01.Q<Button>("Animal7Button");
 
         // Bot Section
-        Bot = root.Q<VisualElement>("Bot");
-        ConfirmButton = root.Q<Button>("Confirm");
-        StartButton = root.Q<Button>("GameStart");
+        Bot1 = root01.Q<VisualElement>("Bot");
+        ConfirmButton1 = root01.Q<Button>("ConfirmButton");
+        StartButton = root01.Q<Button>("GameStartButton");
 
         Animal1.clicked += Animal1_clicked;
         Animal2.clicked += Animal2_clicked;
@@ -66,16 +86,34 @@ public class UIManager : MonoBehaviour
         Animal5.clicked += Animal5_clicked;
         Animal6.clicked += Animal6_clicked;
         Animal7.clicked += Animal7_clicked;
-        ConfirmButton.clicked += ConfirmButton_clicked;
+        ConfirmButton1.clicked += ConfirmButton_clicked;
         StartButton.clicked += StartButton_clicked;
+        #endregion
+        //WinLoseNoticePage 연결
+        #region
+        WinLosePopUp = root02.Q<VisualElement>("WinLosePopUp");
+
+        // Top Section
+        Top2 = root02.Q<VisualElement>("Top");
+        TitleLabel = root02.Q<Label>("TitleLabel");
+
+        // Mid Section
+        Mid2 = root02.Q<VisualElement>("Mid");
+        MainTextLabel = root02.Q<Label>("MainTextLabel");
+        
+        // Bot Section
+        Bot2 = root02.Q<VisualElement>("Bot");
+        ConfirmButton2 = root02.Q<Button>("ConfirmButton");
+
+        ConfirmButton2.clicked += ConfirmButton2_clicked;
         #endregion
     }
 
     private void Start()
     {
-        root = uiDocument.rootVisualElement;
-        root.AddToClassList("DownState");
-        root.AddToClassList("NomalState");
+        root01.AddToClassList("AnimalConfirmPageDownState");
+        root02.AddToClassList("WinLoseNoticePageInvisibleState");
+        root02.AddToClassList("WinLosePopUpSmallState");
         Animal1.style.backgroundImage = new StyleBackground(Animal1Img.texture);
         Animal2.style.backgroundImage = new StyleBackground(Animal2Img.texture);
         Animal3.style.backgroundImage = new StyleBackground(Animal3Img.texture);
@@ -89,70 +127,66 @@ public class UIManager : MonoBehaviour
     public void initialize()
     {
         LeftStartTime = 3f;
-        root.AddToClassList("NomalState");
-        Top1.style.backgroundImage = null;
+        new WaitForSeconds(1f);
+        root01.AddToClassList("AnimalConfirmPageDefaultState");
+        Top11.style.backgroundImage = null;
         PlayerLabel.text = null;
 
         AnimamalButtonEnableTrue();
-        ConfirmButton.visible = false;
+        ConfirmButton1.visible = false;
         StartButton.visible = false;
     }
 
     private void Update()
     {
-        if (LeftStartTime > 0)
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            LeftStartTime -= Time.deltaTime;
-            //countdownText.text = Mathf.Ceil(LeftStartTime).ToString(); // 소수점 올림해서 3,2,1 표시
-        }
-        else
-        {
-            //countdownText.text = "Start!";
-            // 여기서 게임 시작 로직을 넣을 수 있어요
+            AddPopUp();
         }
     }
+
     // Animal 1~7 Bttun Clicked Event
-        #region
+    #region
     private void Animal1_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal1Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal1Img);
         PlayerLabel.text = "Animal01";
     }
     private void Animal2_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal2Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal2Img);
         PlayerLabel.text = "Animal02";
     }
     private void Animal3_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal3Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal3Img);
         PlayerLabel.text = "Animal03";
     }
     private void Animal4_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal4Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal4Img);
         PlayerLabel.text = "Animal04";
     }
     private void Animal5_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal5Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal5Img);
         PlayerLabel.text = "Animal05";
     }
     private void Animal6_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal6Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal6Img);
         PlayerLabel.text = "Animal06";
     }
     private void Animal7_clicked()
     {
-        ConfirmButton.visible = true;
-        Top1.style.backgroundImage = new StyleBackground(Animal7Img);
+        ConfirmButton1.visible = true;
+        Top11.style.backgroundImage = new StyleBackground(Animal7Img);
         PlayerLabel.text = "Animal07";
     }
     #endregion
@@ -160,7 +194,7 @@ public class UIManager : MonoBehaviour
     private void ConfirmButton_clicked()
     {
         AnimamalButtonEnableFalse();
-        ConfirmButton.visible = false;
+        ConfirmButton1.visible = false;
         AIConfirm();
     }
 
@@ -175,14 +209,22 @@ public class UIManager : MonoBehaviour
 
     private void StartButton_clicked()
     {
-        root.RemoveFromClassList("NomalState");
+        root01.RemoveFromClassList("AnimalConfirmPageDefaultState");
         new WaitForSeconds(3f);
         OnGamePlayStartEvent?.Invoke();
     }
 
-    public void OnGamePlayEndEvent()
+    public void AddPopUp()
     {
-        initialize();
+        root02.AddToClassList("WinLoseNoticePageDefaultState");
+        root02.AddToClassList("WinLosePopUpDefaultState");
+    }
+
+    public void ConfirmButton2_clicked()
+    {
+        Debug.Log("ConfirmButton2_clicked");
+        root02.RemoveFromClassList("WinLoseNoticePageDefaultState");
+        root02.RemoveFromClassList("WinLosePopUpDefaultState");
     }
 
     public void AnimamalButtonEnableTrue()
