@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform endPointPos;
 
 
-    public void OnGamePlayEvent()
+    public void OnGamePlayStartEvent()
     {
         agentManager.StartToRun(endPointPos.position);
     }

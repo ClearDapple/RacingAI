@@ -434,7 +434,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 634655250}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnGamePlayEndEvent
+        m_MethodName: AddPopUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1263,7 +1263,22 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1737072158}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnGamePlayEvent
+        m_MethodName: OnGamePlayStartEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPopUpCloseEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 634655250}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: initialize
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2467,7 +2482,7 @@ Transform:
   m_GameObject: {fileID: 1521310628}
   serializedVersion: 2
   m_LocalRotation: {x: -0.62324274, y: -0.0051540765, z: 0.0041112783, w: -0.7820007}
-  m_LocalPosition: {x: 7.861706, y: 76.46058, z: -15.080052}
+  m_LocalPosition: {x: 0, y: 75, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

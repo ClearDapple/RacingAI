@@ -24,7 +24,7 @@
                 <ui:Button text="GameStart" name="GameStartButton" style="width: 40%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="WinLoseNoticePage" class="WinLoseNoticePageInvisibleState WinLoseNoticePageDefaultState" style="display: flex;">
+        <ui:VisualElement name="WinLoseNoticePage" enabled="true" class="WinLoseNoticePageInvisibleState WinLoseNoticePageDefaultState" style="display: flex; overflow: visible; visibility: visible;">
             <ui:VisualElement name="WinLosePopUp" class="WinLosePopUpSmallState WinLosePopUpDefaultState">
                 <ui:VisualElement name="Top" style="flex-grow: 0; width: 100%; height: 30%; flex-shrink: 0; align-items: center; justify-content: center; background-size: 100% 100%; background-color: rgb(252, 249, 234);">
                     <ui:Label text="Title" name="TitleLabel" style="font-size: 32px; -unity-text-align: middle-center; -unity-font-style: bold; width: 60%; height: 80%;" />
@@ -33,7 +33,7 @@
                     <ui:Label text="MainText" name="MainTextLabel" style="width: 100%; height: 100%; align-items: auto; justify-content: flex-start; align-content: auto; -unity-text-align: upper-left;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Bot" style="flex-grow: 0; width: 100%; height: 20%; flex-shrink: 0; align-items: center; justify-content: center; background-color: rgb(255, 197, 160);">
-                    <ui:Button name="ConfrimButton" style="height: 50%; width: 20%; background-color: rgb(249, 169, 120);" />
+                    <ui:Button name="ConfirmButton" style="height: 50%; width: 20%; background-color: rgb(249, 169, 120);" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
