@@ -1,10 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Agent : MonoBehaviour
 {
     Action<Ticket> myAction;
+
+    [SerializeField] private UIDocument uiDocument;
+    private VisualElement root;
+    private Label head, body, foot;
+
     public Vector3 destination = Vector3.zero;
     public Vector3 orignalPos;
     public NavMeshAgent agent;
@@ -21,6 +27,21 @@ public class Agent : MonoBehaviour
             this.ElapsedTime = time;
             this.Name = name;
         }
+    }
+
+    private void Awake()
+    {
+        root = uiDocument.rootVisualElement;
+        head = root.Q<Label>("head");
+        body = root.Q<Label>("body");
+        body = root.Q<Label>("foot");
+    }
+
+    private void CheakMyData()
+    {
+        //head.text = this.gameObject.name;
+        //body.text = destination.ToString();
+        //foot.text = agent.speed.ToString();
     }
 
     void Start()
@@ -49,6 +70,8 @@ public class Agent : MonoBehaviour
 
     void Update()
     {
+        CheakMyData();
+
         if (destination == Vector3.zero) return;
 
         if (agent.remainingDistance < agent.stoppingDistance)

@@ -53,37 +53,37 @@ public class UIManager : MonoBehaviour
 
         //AnimalConfirmPage ¿¬°á
         #region
-        playerImg = AnimalConfirmPage.Q<VisualElement>("playerImg");
-        AIImg = AnimalConfirmPage.Q<VisualElement>("AIImg");
-        PlayerLabel = AnimalConfirmPage.Q<Label>("PlayerLabel");
-        AILabel = AnimalConfirmPage.Q<Label>("AILabel");
+        playerImg = root.Q<VisualElement>("playerImg");
+        AIImg = root.Q<VisualElement>("AIImg");
+        PlayerLabel = root.Q<Label>("PlayerLabel");
+        AILabel = root.Q<Label>("AILabel");
 
-        var m1 = Animal1Button.Q<Button>("Animal1Button");
-        var m2 = Animal2Button.Q<Button>("Animal2Button");
-        var m3 = Animal3Button.Q<Button>("Animal3Button");
-        var m4 = Animal4Button.Q<Button>("Animal4Button");
-        var m5 = Animal5Button.Q<Button>("Animal5Button");
-        var m6 = Animal6Button.Q<Button>("Animal6Button");
-        var m7 = Animal7Button.Q<Button>("Animal7Button");
+        var a1 = Animal1Button = root.Q<Button>("Animal1Button");
+        var a2 = Animal2Button = root.Q<Button>("Animal2Button");
+        var a3 = Animal3Button = root.Q<Button>("Animal3Button");
+        var a4 = Animal4Button = root.Q<Button>("Animal4Button");
+        var a5 = Animal5Button = root.Q<Button>("Animal5Button");
+        var a6 = Animal6Button = root.Q<Button>("Animal6Button");
+        var a7 = Animal7Button = root.Q<Button>("Animal7Button");
 
-        m1.clicked += () => { Animal1_clicked(); };
-        Animal2Button.clicked += () => { Animal2_clicked(); };
-        Animal3Button.clicked += () => { Animal3_clicked(); };
-        Animal4Button.clicked += () => { Animal4_clicked(); };
-        Animal5Button.clicked += () => { Animal5_clicked(); };
-        Animal6Button.clicked += () => { Animal6_clicked(); };
-        Animal7Button.clicked += () => { Animal7_clicked(); };
+        a1.clicked += () => { Animal1_clicked(); };
+        a2.clicked += () => { Animal2_clicked(); };
+        a3.clicked += () => { Animal3_clicked(); };
+        a4.clicked += () => { Animal4_clicked(); };
+        a5.clicked += () => { Animal5_clicked(); };
+        a6.clicked += () => { Animal6_clicked(); };
+        a7.clicked += () => { Animal7_clicked(); };
 
-        Animal1Button.style.backgroundImage = new StyleBackground(Animal1Img.texture);
-        Animal2Button.style.backgroundImage = new StyleBackground(Animal2Img.texture);
-        Animal3Button.style.backgroundImage = new StyleBackground(Animal3Img.texture);
-        Animal4Button.style.backgroundImage = new StyleBackground(Animal4Img.texture);
-        Animal5Button.style.backgroundImage = new StyleBackground(Animal5Img.texture);
-        Animal6Button.style.backgroundImage = new StyleBackground(Animal6Img.texture);
-        Animal7Button.style.backgroundImage = new StyleBackground(Animal7Img.texture);
+        a1.style.backgroundImage = new StyleBackground(Animal1Img.texture);
+        a2.style.backgroundImage = new StyleBackground(Animal2Img.texture);
+        a3.style.backgroundImage = new StyleBackground(Animal3Img.texture);
+        a4.style.backgroundImage = new StyleBackground(Animal4Img.texture);
+        a5.style.backgroundImage = new StyleBackground(Animal5Img.texture);
+        a6.style.backgroundImage = new StyleBackground(Animal6Img.texture);
+        a7.style.backgroundImage = new StyleBackground(Animal7Img.texture);
 
-        var b1 = AnimalConfirmPageConfirmButton.Q<Button>("AnimalConfirmPageConfirmButton");
-        var b2 = AnimalConfirmPage.Q<Button>("GameStartButton");
+        var b1 = AnimalConfirmPageConfirmButton = AnimalConfirmPage.Q<Button>("ConfirmButton");
+        var b2 = StartButton = root.Q<Button>("GameStartButton");
 
         b1.clicked += () => { AnimalConfirmPageConfirmButton_clicked(); };
         b2.clicked += () => { GameStartButton_clicked(); };
@@ -96,8 +96,8 @@ public class UIManager : MonoBehaviour
         TitleLabel = WinLoseNoticePage.Q<Label>("TitleLabel");
         MainTextLabel = WinLoseNoticePage.Q<Label>("MainTextLabel");
 
-        var q = WinLoseNoticePageConfirmButton = WinLoseNoticePage.Q<Button>("ConfirmButton");
-        q.clicked += () => { WinLoseNoticePageConfirmButton_clicked(); };
+        var c1 = WinLoseNoticePage.Q<Button>("ConfirmButton");
+        c1.clicked += () => { WinLoseNoticePageConfirmButton_clicked(); };
         #endregion
     }
 
@@ -119,6 +119,8 @@ public class UIManager : MonoBehaviour
         AnimalConfirmPage.AddToClassList("AnimalConfirmPageDefaultState");
         playerImg.style.backgroundImage = null;
         PlayerLabel.text = null;
+        AIImg.style.backgroundImage = null;
+        AILabel.text = null;
 
         AnimamalButtonEnableTrue();
         AnimalConfirmPageConfirmButton.visible = false;
