@@ -22,10 +22,13 @@ public class Agent : MonoBehaviour
     {
         public float ElapsedTime;
         public string Name;
-        public Ticket(float time, string name)
+        public GameObject Obj;
+
+        public Ticket(float time, string name, GameObject obj)
         {
             this.ElapsedTime = time;
             this.Name = name;
+            this.Obj = obj;
         }
     }
 
@@ -35,13 +38,6 @@ public class Agent : MonoBehaviour
         head = root.Q<Label>("head");
         body = root.Q<Label>("body");
         body = root.Q<Label>("foot");
-    }
-
-    private void CheakMyData()
-    {
-        //head.text = this.gameObject.name;
-        //body.text = destination.ToString();
-        //foot.text = agent.speed.ToString();
     }
 
     void Start()
@@ -70,18 +66,15 @@ public class Agent : MonoBehaviour
 
     void Update()
     {
-        CheakMyData();
-
         if (destination == Vector3.zero) return;
 
         if (agent.remainingDistance < agent.stoppingDistance)
         {
-
             destination = Vector3.zero;
             elapsedTime = Time.time - startTime;
             
             Debug.Log("µµÂøÇÔ");
-            myAction(new Ticket(elapsedTime, this.gameObject.name));
+            myAction(new Ticket(elapsedTime, this.gameObject.name, this.gameObject));
 
              agent.Warp(orignalPos);
         }

@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public UnityEvent OnGamePlayStartEvent;
     public UnityEvent OnPopUpCloseEvent;
 
-    public float LeftStartTime = Mathf.Clamp(3f, 0f, 3f);
+    [SerializeField] GameManager gameManager;
 
     [SerializeField] private UIDocument uiDocument;
 
@@ -134,42 +134,50 @@ public class UIManager : MonoBehaviour
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal1Img);
         PlayerLabel.text = "Animal01";
+        gameManager.PlayerChoice = 1;
+
     }
     private void Animal2_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal2Img);
         PlayerLabel.text = "Animal02";
+        gameManager.PlayerChoice = 2;
     }
     private void Animal3_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal3Img);
         PlayerLabel.text = "Animal03";
+        gameManager.PlayerChoice = 3;
     }
     private void Animal4_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal4Img);
         PlayerLabel.text = "Animal04";
+        gameManager.PlayerChoice = 4;
     }
     private void Animal5_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal5Img);
         PlayerLabel.text = "Animal05";
+        gameManager.PlayerChoice = 5;
     }
     private void Animal6_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal6Img);
         PlayerLabel.text = "Animal06";
+        gameManager.PlayerChoice = 6;
     }
     private void Animal7_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal7Img);
         PlayerLabel.text = "Animal07";
+        gameManager.PlayerChoice = 7;
     }
     #endregion
 
@@ -182,8 +190,9 @@ public class UIManager : MonoBehaviour
 
     private void AIConfirm()
     {
-        //ai가 내가 고르지 않은 동물 중 하나를 고른다.
-        AILabel.text="Animal: " + Random.Range(1, 7).ToString();//확인용
+        gameManager.selectAgentNumber();
+        AILabel.text = "Animal0" + gameManager.AIChoice.ToString();
+
         StartButton.visible = true;
     }
 

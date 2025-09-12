@@ -1425,7 +1425,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  LeftStartTime: 3
+  gameManager: {fileID: 1737072158}
   uiDocument: {fileID: 634655251}
   Animal1Img: {fileID: 21300000, guid: 1e23bd180e8a40e49bd0176957e851d8, type: 3}
   Animal2Img: {fileID: 21300000, guid: ac323f0c393a3734e8dc2f156ce061e7, type: 3}
@@ -3362,7 +3362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737072156}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3384,6 +3384,8 @@ MonoBehaviour:
   mainCamera: {fileID: 1521310629}
   agentManager: {fileID: 210592503}
   endPointPos: {fileID: 1136739468}
+  PlayerChoice: 0
+  AIChoice: 0
 --- !u!1 &1767289927
 GameObject:
   m_ObjectHideFlags: 0
