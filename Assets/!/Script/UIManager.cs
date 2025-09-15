@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 using Label = UnityEngine.UIElements.Label;
 using UnityEngine.Events;
+using System.Security.Cryptography;
 
 public class UIManager : MonoBehaviour
 {
@@ -134,7 +135,7 @@ public class UIManager : MonoBehaviour
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal1Img);
         PlayerLabel.text = "Animal01";
-        gameManager.PlayerChoice = 1;
+        gameManager.intPlayerChoice = 1;
 
     }
     private void Animal2_clicked()
@@ -142,42 +143,42 @@ public class UIManager : MonoBehaviour
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal2Img);
         PlayerLabel.text = "Animal02";
-        gameManager.PlayerChoice = 2;
+        gameManager.intPlayerChoice = 2;
     }
     private void Animal3_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal3Img);
         PlayerLabel.text = "Animal03";
-        gameManager.PlayerChoice = 3;
+        gameManager.intPlayerChoice = 3;
     }
     private void Animal4_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal4Img);
         PlayerLabel.text = "Animal04";
-        gameManager.PlayerChoice = 4;
+        gameManager.intPlayerChoice = 4;
     }
     private void Animal5_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal5Img);
         PlayerLabel.text = "Animal05";
-        gameManager.PlayerChoice = 5;
+        gameManager.intPlayerChoice = 5;
     }
     private void Animal6_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal6Img);
         PlayerLabel.text = "Animal06";
-        gameManager.PlayerChoice = 6;
+        gameManager.intPlayerChoice = 6;
     }
     private void Animal7_clicked()
     {
         AnimalConfirmPageConfirmButton.visible = true;
         playerImg.style.backgroundImage = new StyleBackground(Animal7Img);
         PlayerLabel.text = "Animal07";
-        gameManager.PlayerChoice = 7;
+        gameManager.intPlayerChoice = 7;
     }
     #endregion
 
@@ -191,7 +192,7 @@ public class UIManager : MonoBehaviour
     private void AIConfirm()
     {
         gameManager.selectAgentNumber();
-        AILabel.text = "Animal0" + gameManager.AIChoice.ToString();
+        AILabel.text = "Animal0" + gameManager.intAIChoice.ToString();
 
         StartButton.visible = true;
     }
@@ -201,6 +202,22 @@ public class UIManager : MonoBehaviour
         AnimalConfirmPage.RemoveFromClassList("AnimalConfirmPageDefaultState");
         OnGamePlayStartEvent?.Invoke();
     }
+
+    //public void ScoreBoardText(string a1, )
+    //{
+    //    TitleLabel.text = 
+
+    //    MainTextLabel.text = $"1st ----- {gameManager.agentManager.rank1}\r\n"
+    //                       + $"2nd ----- {agentManager.rank2}\r\n"
+    //                       + $"3rd ----- {agentManager.rank3}\r\n"
+    //                       + $"4th ----- {agentManager.rank4}\r\n"
+    //                       + $"5th ----- {agentManager.rank5}\r\n"
+    //                       + $"6th ----- {agentManager.rank6}\r\n"
+    //                       + $"7th ----- {agentManager.rank7}";
+    //    AddPopUp();
+    //}
+
+
 
     public void AddPopUp()
     {

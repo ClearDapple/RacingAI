@@ -8,21 +8,66 @@ using static UnityEditor.PlayerSettings;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
+    [SerializeField] UIManager uiManager;
     [SerializeField] AgentManager agentManager;
     [SerializeField] Transform endPointPos;
 
-    public int PlayerChoice = 0;
-    public int AIChoice = 0;
+    public int intPlayerChoice;
+    public int intAIChoice;
+    public string strPlayerChoice;
+    public string strAIChoice;
+    public string scoreBoard;
+
+    private void Start()
+    {
+        initialize();
+    }
+
+    public void initialize()
+    {
+        intPlayerChoice = 0;
+        intAIChoice = 0;
+        strPlayerChoice = "";
+        strAIChoice = "";
+        scoreBoard = "";
+    }
 
     public void OnGamePlayStartEvent()
     {
         agentManager.StartToRun(endPointPos.position);
     }
 
+    public void OnGamePlayEndEvent()
+    {
+        //string a1 = agentManager.rank1;
+        //string a2 = agentManager.rank2;
+        //string a3 = agentManager.rank3;
+        //string a4 = agentManager.rank4;
+        //string a5 = agentManager.rank5;
+        //string a6 = agentManager.rank6;
+        //string a7 = agentManager.rank7;
+
+        //uiManager.ScoreBoardText(a1, a2, a3, a4, a5, a6, a7);
+        //scoreBoard = $"1st ----- {agentManager.rank1}\r\n"
+        //           + $"2nd ----- {agentManager.rank2}\r\n"
+        //           + $"3rd ----- {agentManager.rank3}\r\n"
+        //           + $"4th ----- {agentManager.rank4}\r\n"
+        //           + $"5th ----- {agentManager.rank5}\r\n"
+        //           + $"6th ----- {agentManager.rank6}\r\n"
+        //           + $"7th ----- {agentManager.rank7}";
+
+        ////순위 보여주기
+
+
+        ////승패 정하기
+        ////PlayerChoice와 AIChoice 비교
+
+    }
+
     public void selectAgentNumber()
     {
-        int randomNum = GetRandomNumberExcluding(PlayerChoice);
-        AIChoice = randomNum;
+        int randomNum = GetRandomNumberExcluding(intPlayerChoice);
+        intAIChoice = randomNum;
     }
 
     int GetRandomNumberExcluding(int excludedNumber)
@@ -43,7 +88,6 @@ public class GameManager : MonoBehaviour
         int randomIndex = Random.Range(0, availableNumbers.Length);
         return availableNumbers[randomIndex];
     }
-
 }
 /*
 if (Input.GetMouseButtonDown(0))

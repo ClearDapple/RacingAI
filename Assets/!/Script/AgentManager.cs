@@ -14,9 +14,23 @@ public class AgentManager: MonoBehaviour
     private List<GameObject> arrivalList = new List<GameObject>();
     private List<int> rank;
 
-
     public Agent[] agents;
     public Queue agentQueue = new Queue();
+
+    //public struct RankTicket
+    //{
+    //    public int Rank1, Rank2, Rank3, Rank4, Rank5, Rank6, Rank7;
+    //    public string Name1, Name2, Name3, Name4, Name5, Name7;
+
+    //    public RankTicket(int rank1, string name, GameObject obj)
+    //    {
+    //        this.ElapsedTime = time;
+    //        this.Name = name;
+    //        this.Obj = obj;
+    //    }
+    //}
+
+    public string rank1, rank2, rank3, rank4, rank5, rank6, rank7;
 
 
     public void StartToRun(Vector3 pos)
@@ -42,7 +56,7 @@ public class AgentManager: MonoBehaviour
     private void CollectAgets(Ticket ticket)
     {
         agentQueue.Enqueue(ticket);
-        ////rank.Add();
+        ////rank.Add(rankCounter++);
         arrivalList.Add(ticket.Obj);
         Debug.Log($"{arrivalList.Count} : {ticket.Name}({ticket.ElapsedTime})");
         CheckAllAgents();
@@ -62,6 +76,14 @@ public class AgentManager: MonoBehaviour
 
     public void PrintArrivalOrder()//도착순서 출력
     {
+        rank1 = arrivalList[0].name;
+        rank2 = arrivalList[1].name;
+        rank3 = arrivalList[2].name;
+        rank4 = arrivalList[3].name;
+        rank5 = arrivalList[4].name;
+        rank6 = arrivalList[5].name;
+        rank7 = arrivalList[6].name;
+
         Debug.Log("=== 도착 순서 ===");
         for (int i = 0; i < arrivalList.Count; i++)
         {

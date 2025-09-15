@@ -20,7 +20,7 @@ namespace LootLocker
         * leaderboardKey can be the same between stage and live /development mode on/off.
         * So if you use the key instead of the ID, you don't need to change any code when switching development_mode.
         */
-        string leaderboardKey = "playerLeaderboard";
+        string leaderboardKey = "player_score_leader_boaer";
         // int leaderboardID = 4705;
 
         string memberID;
@@ -56,8 +56,8 @@ namespace LootLocker
                     infoText.text = "Guest session started";
                     playerIDText.text = "Player ID:" + response.player_id.ToString();
                     memberID = response.player_id.ToString();
-                    UpdateLeaderboardTop10();
-                    UpdateLeaderboardCentered();
+                    //UpdateLeaderboardTop10();
+                    //UpdateLeaderboardCentered();
                 }
                 else
                 {
@@ -85,8 +85,8 @@ namespace LootLocker
                     /*
                      * Update the leaderboards when the new score was sent so we can see them
                      */
-                    UpdateLeaderboardCentered();
-                    UpdateLeaderboardTop10();
+                    //UpdateLeaderboardCentered();
+                    //UpdateLeaderboardTop10();
                 }
                 else
                 {
@@ -94,6 +94,7 @@ namespace LootLocker
                 }
             });
         }
+
         void UpdateLeaderboardCentered()
         {
             LootLockerSDKManager.GetMemberRank(leaderboardKey, memberID, (memberResponse) =>

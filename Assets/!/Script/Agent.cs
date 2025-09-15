@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Agent : MonoBehaviour
 {
-    Action<Ticket> myAction;
+    Action<Ticket> agentCallbackAction;
 
     [SerializeField] private UIDocument uiDocument;
     private VisualElement root;
@@ -56,7 +56,7 @@ public class Agent : MonoBehaviour
 
     public void CallbackAction(Action<Ticket> action)
     {
-        myAction = action;
+        agentCallbackAction = action;
     }
 
     public void CheckStartTime()
@@ -74,7 +74,7 @@ public class Agent : MonoBehaviour
             elapsedTime = Time.time - startTime;
             
             Debug.Log("µµÂøÇÔ");
-            myAction(new Ticket(elapsedTime, this.gameObject.name, this.gameObject));
+            agentCallbackAction(new Ticket(elapsedTime, this.gameObject.name, this.gameObject));
 
              agent.Warp(orignalPos);
         }

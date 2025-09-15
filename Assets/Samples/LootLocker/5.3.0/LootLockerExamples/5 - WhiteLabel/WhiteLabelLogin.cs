@@ -3,122 +3,162 @@ using System;
 using UnityEngine.UI;
 using LootLocker.Requests;
 
-namespace LootLocker {
-public class WhiteLabelLogin : MonoBehaviour
+namespace LootLocker
 {
-    // Input fields
-    [Header("New User")]
-    public InputField newUserEmailInputField;
-    public InputField newUserPasswordInputField;
-
-    [Header("Existing User")]
-    public InputField existingUserEmailInputField;
-    public InputField existingUserPasswordInputField;
-
-    public Text infoText;
-
-    private void Awake()
+    public class WhiteLabelLogin : MonoBehaviour
     {
-        LootLockerSettingsOverrider.OverrideSettings();
-    }
+        // Input fields
+        [Header("New User")]
+        public InputField newUserEmailInputField;
+        public InputField newUserPasswordInputField;
 
-    // Called when pressing "Log in"
-    public void Login()
-    {
-        string email = existingUserEmailInputField.text;
-        string password = existingUserPasswordInputField.text;
-        LootLockerSDKManager.WhiteLabelLogin(email, password, false, loginResponse =>
+        [Header("Existing User")]
+        public InputField existingUserEmailInputField;
+        public InputField existingUserPasswordInputField;
+
+        public Text infoText;
+        string leaderboardKey = "player_score_leader_boaer";
+        string member_id = string.Empty;
+
+
+        private void Awake()
         {
-            if (!loginResponse.success)
-            {
-                // Error
-                infoText.text = "Error logging in:" + loginResponse.errorData.message;
-                return;
-            }
-            else
-            {
-                infoText.text = "Player was logged in succesfully";
-            }
+            LootLockerSettingsOverrider.OverrideSettings();
+        }
 
-            // Is the account verified?
-            if (loginResponse.VerifiedAt == null)
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
-                // Stop here if you want to require your players to verify their email before continuing,
-                // verification must also be enabled on the LootLocker dashboard
+                UploadScore("200");
             }
+        }
 
-            // Player is logged in, now start a game session
-            LootLockerSDKManager.StartWhiteLabelSession((startSessionResponse) =>
+        public void UploadScore(string score)
+        {
+            /*
+             * Get the players System language and send it as metadata
+             */
+            string metadata = Application.systemLanguage.ToString();
+
+            /*
+             * Since this is a player leaderboard, member_id is not needed, 
+             * the logged in user is the one that will upload the score.
+             */
+            LootLockerSDKManager.SubmitScore(member_id, int.Parse(score), leaderboardKey, metadata, (response) =>
             {
-                if (startSessionResponse.success)
+                if (response.success)
                 {
-                    // Session was succesfully started;
-                    // After this you can use LootLocker features
-                    infoText.text = "Session started successfully";
+                    infoText.text = "Player score was submitted";
+                    Debug.Log("스코어 전달 성공");
                 }
                 else
                 {
-                    // Error
-                    infoText.text = "Error starting LootLocker session:" + startSessionResponse.errorData.message;
+                    infoText.text = "Error submitting score:" + response.errorData.message;
+                    Debug.Log("스코어 전달 실패");
                 }
             });
-        });
-    }
+        }
 
-    // Called when pressing "Create account"
-    public void CreateAccount()
-    {
-        string email = newUserEmailInputField.text;
-        string password = newUserPasswordInputField.text;
-
-        LootLockerSDKManager.WhiteLabelSignUp(email, password, (response) =>
+        // Called when pressing "Log in"
+        public void Login()
         {
-            if (!response.success)
+            string email = existingUserEmailInputField.text;
+            string password = existingUserPasswordInputField.text;
+            LootLockerSDKManager.WhiteLabelLogin(email, password, false, loginResponse =>
             {
-                infoText.text = "Error signing up:"+response.errorData.message;
-                return;
-            }
-            else
-            {
-                // Succesful response
-                infoText.text = "Account created";
-            }
-        });
-    }
+                if (!loginResponse.success)
+                {
+                    // Error
+                    infoText.text = "Error logging in:" + loginResponse.errorData.message;
+                    return;
+                }
+                else
+                {
+                    infoText.text = "Player was logged in succesfully";
+                    member_id = loginResponse.ID.ToString();
+                }
 
-    public void ResendVerificationEmail()
-    {
-        // Player ID can be retrieved when starting a session or creating an account.
-        int playerID = 0;
-        // Request a verification email to be sent to the registered user, 
-        LootLockerSDKManager.WhiteLabelRequestVerification(playerID, (response) =>
+                // Is the account verified?
+                if (loginResponse.VerifiedAt == null)
+                {
+                    // Stop here if you want to require your players to verify their email before continuing,
+                    // verification must also be enabled on the LootLocker dashboard
+                }
+
+                // Player is logged in, now start a game session
+                LootLockerSDKManager.StartWhiteLabelSession((startSessionResponse) =>
+                {
+                    if (startSessionResponse.success)
+                    {
+                        // Session was succesfully started;
+                        // After this you can use LootLocker features
+                        infoText.text = "Session started successfully";
+                    }
+                    else
+                    {
+                        // Error
+                        infoText.text = "Error starting LootLocker session:" + startSessionResponse.errorData.message;
+                    }
+                });
+            });
+        }
+
+        // Called when pressing "Create account"
+        public void CreateAccount()
         {
-            if(response.success)
-            {
-                Debug.Log("Verification email sent!");
-            }
-            else
-            {
-                Debug.Log("Error sending verification email:" + response.errorData.message);
-            }
+            string email = newUserEmailInputField.text;
+            string password = newUserPasswordInputField.text;
 
-        });
-    }
+            LootLockerSDKManager.WhiteLabelSignUp(email, password, (response) =>
+            {
+                if (!response.success)
+                {
+                    infoText.text = "Error signing up:" + response.errorData.message;
+                    return;
+                }
+                else
+                {
+                    // Succesful response
+                    infoText.text = "Account created";
+                }
+            });
+        }
 
-    public void SendResetPassword()
-    {
-        // Sends a password reset-link to the email
-        LootLockerSDKManager.WhiteLabelRequestPassword("email@email-provider.com", (response) =>
+        public void ResendVerificationEmail()
         {
-            if(response.success)
+            // Player ID can be retrieved when starting a session or creating an account.
+            int playerID = 0;
+            // Request a verification email to be sent to the registered user, 
+            LootLockerSDKManager.WhiteLabelRequestVerification(playerID, (response) =>
             {
-                Debug.Log("Password reset link sent!");
-            }
-            else
+                if (response.success)
+                {
+                    Debug.Log("Verification email sent!");
+                }
+                else
+                {
+                    Debug.Log("Error sending verification email:" + response.errorData.message);
+                }
+
+            });
+        }
+
+        public void SendResetPassword()
+        {
+            // Sends a password reset-link to the email
+            LootLockerSDKManager.WhiteLabelRequestPassword("email@email-provider.com", (response) =>
             {
-                Debug.Log("Error sending password-reset-link:" + response.errorData.message);
-            }
-        });
+                if (response.success)
+                {
+                    Debug.Log("Password reset link sent!");
+                }
+                else
+                {
+                    Debug.Log("Error sending password-reset-link:" + response.errorData.message);
+                }
+            });
+        }
+
     }
-}
 }

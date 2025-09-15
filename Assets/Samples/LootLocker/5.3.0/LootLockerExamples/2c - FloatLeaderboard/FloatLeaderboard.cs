@@ -20,7 +20,7 @@ public class FloatLeaderboard : MonoBehaviour
     * leaderboardKey can be the same between stage and live /development mode on/off.
     * So if you use the key instead of the ID, you don't need to change any code when switching development_mode.
     */
-    string leaderboardKey = "floatLeaderboard";
+    string leaderboardKey = "playerLeaderboard";
     // int leaderboardID = 4718;
 
     string memberID;
