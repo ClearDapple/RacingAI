@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 167527021}
   - component: {fileID: 167527020}
   m_Layer: 0
-  m_Name: Agent01
+  m_Name: Agent_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,6 +446,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  myPickSO: {fileID: 11400000, guid: bca90a03aed25ab41afaba3f0515e7b8, type: 2}
   agents:
   - {fileID: 167527020}
   - {fileID: 1801397084}
@@ -534,7 +535,7 @@ GameObject:
   - component: {fileID: 241877617}
   - component: {fileID: 241877616}
   m_Layer: 0
-  m_Name: Agent04
+  m_Name: Agent_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,7 +691,7 @@ GameObject:
   - component: {fileID: 305012217}
   - component: {fileID: 305012216}
   m_Layer: 0
-  m_Name: Agent05
+  m_Name: Agent_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1425,6 +1426,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  myPickSO: {fileID: 11400000, guid: bca90a03aed25ab41afaba3f0515e7b8, type: 2}
   gameManager: {fileID: 1737072158}
   uiDocument: {fileID: 634655251}
   Animal1Img: {fileID: 21300000, guid: 1e23bd180e8a40e49bd0176957e851d8, type: 3}
@@ -1567,8 +1569,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1414791128}
-  - {fileID: 1365084298}
   - {fileID: 1510751991}
+  - {fileID: 1365084298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &819928537
@@ -1620,7 +1622,7 @@ GameObject:
   - component: {fileID: 870557283}
   - component: {fileID: 870557282}
   m_Layer: 0
-  m_Name: Agent06
+  m_Name: Agent_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2030,7 +2032,7 @@ GameObject:
   - component: {fileID: 1168203051}
   - component: {fileID: 1168203050}
   m_Layer: 0
-  m_Name: Agent03
+  m_Name: Agent_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2324,7 +2326,7 @@ GameObject:
   - component: {fileID: 1311811080}
   - component: {fileID: 1311811079}
   m_Layer: 0
-  m_Name: Agent07
+  m_Name: Agent_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3381,11 +3383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420023a33e37c5b449ddad124145de45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  myPickSO: {fileID: 0}
   mainCamera: {fileID: 1521310629}
+  uiManager: {fileID: 634655250}
   agentManager: {fileID: 210592503}
   endPointPos: {fileID: 1136739468}
-  PlayerChoice: 0
-  AIChoice: 0
 --- !u!1 &1767289927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,7 +3644,7 @@ GameObject:
   - component: {fileID: 1801397085}
   - component: {fileID: 1801397084}
   m_Layer: 0
-  m_Name: Agent02
+  m_Name: Agent_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

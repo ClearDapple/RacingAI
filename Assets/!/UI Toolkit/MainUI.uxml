@@ -11,13 +11,13 @@
                 <ui:VisualElement name="AIImg" style="flex-grow: 1; width: 30%; flex-direction: column; align-content: auto; justify-content: flex-start; align-self: auto; align-items: auto;" />
             </ui:VisualElement>
             <ui:VisualElement name="body" style="flex-grow: 1; width: 100%; height: 30%; flex-direction: row; align-self: auto; align-items: center; align-content: auto; justify-content: space-evenly;">
-                <ui:Button name="Animal1Button" style="width: 100px; height: 100px;" />
-                <ui:Button name="Animal2Button" style="width: 100px; height: 100px;" />
-                <ui:Button name="Animal3Button" style="width: 100px; height: 100px;" />
-                <ui:Button name="Animal4Button" style="width: 100px; height: 100px;" />
-                <ui:Button name="Animal5Button" style="height: 100px; width: 100px;" />
-                <ui:Button name="Animal6Button" style="width: 100px; height: 100px;" />
-                <ui:Button name="Animal7Button" style="height: 100px; width: 100px;" />
+                <ui:Button name="Agent_01" style="width: 100px; height: 100px;" />
+                <ui:Button name="Agent_02" style="width: 100px; height: 100px;" />
+                <ui:Button name="Agent_03" style="width: 100px; height: 100px;" />
+                <ui:Button name="Agent_04" style="width: 100px; height: 100px;" />
+                <ui:Button name="Agent_05" style="height: 100px; width: 100px;" />
+                <ui:Button name="Agent_06" style="width: 100px; height: 100px;" />
+                <ui:Button name="Agent_07" style="height: 100px; width: 100px;" />
             </ui:VisualElement>
             <ui:VisualElement name="footer" style="flex-grow: 1; height: 20%; width: 100%; justify-content: space-around; align-items: center; flex-direction: row; align-self: center; align-content: center;">
                 <ui:Button text="Confirm" name="ConfirmButton" style="width: 40%;" />

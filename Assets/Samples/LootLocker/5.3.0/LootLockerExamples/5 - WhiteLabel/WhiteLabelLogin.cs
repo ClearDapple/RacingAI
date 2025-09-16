@@ -1,7 +1,8 @@
-using UnityEngine;
-using System;
-using UnityEngine.UI;
+using LootLocker.Extension.Responses;
 using LootLocker.Requests;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace LootLocker
 {
@@ -17,7 +18,7 @@ namespace LootLocker
         public InputField existingUserPasswordInputField;
 
         public Text infoText;
-        string leaderboardKey = "player_score_leader_boaer";
+        string leaderboardKey = "leaderboardkey";
         string member_id = string.Empty;
 
 
@@ -76,6 +77,7 @@ namespace LootLocker
                 else
                 {
                     infoText.text = "Player was logged in succesfully";
+                    Debug.Log("로그인 성공");
                     member_id = loginResponse.ID.ToString();
                 }
 
@@ -121,6 +123,7 @@ namespace LootLocker
                 {
                     // Succesful response
                     infoText.text = "Account created";
+                    member_id = response.ID.ToString();
                 }
             });
         }

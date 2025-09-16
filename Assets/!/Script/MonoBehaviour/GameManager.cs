@@ -7,16 +7,11 @@ using static UnityEditor.PlayerSettings;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] MyPickSO myPickSO;
     [SerializeField] Camera mainCamera;
     [SerializeField] UIManager uiManager;
     [SerializeField] AgentManager agentManager;
     [SerializeField] Transform endPointPos;
-
-    public int intPlayerChoice;
-    public int intAIChoice;
-    public string strPlayerChoice;
-    public string strAIChoice;
-    public string scoreBoard;
 
     private void Start()
     {
@@ -25,11 +20,7 @@ public class GameManager : MonoBehaviour
 
     public void initialize()
     {
-        intPlayerChoice = 0;
-        intAIChoice = 0;
-        strPlayerChoice = "";
-        strAIChoice = "";
-        scoreBoard = "";
+
     }
 
     public void OnGamePlayStartEvent()
@@ -61,48 +52,40 @@ public class GameManager : MonoBehaviour
 
         ////승패 정하기
         ////PlayerChoice와 AIChoice 비교
-
     }
 
-    public void selectAgentNumber()
+    public void SelectAgentNumber(string playerAgentName)
     {
-        int randomNum = GetRandomNumberExcluding(intPlayerChoice);
-        intAIChoice = randomNum;
-    }
+        int playerAgentNumber = int.Parse(name.Split('_')[1]);
 
-    int GetRandomNumberExcluding(int excludedNumber)
-    {
-        int[] availableNumbers = new int[6];
-        int index = 0;
+        int randomNumber = GetRandomNumberExcluding(playerAgentNumber);
 
-        for (int i = 1; i <= 7; i++)
+        if (randomNumber < 10)
         {
-            if (i != excludedNumber)
-            {
-                availableNumbers[index] = i;
-                index++;
-            }
+            myPickSO.AIName = $"Agent_0{randomNumber}";
+        }
+        else
+        {
+            myPickSO.AIName = $"Agent_{randomNumber}";
         }
 
-        // 랜덤으로 하나 선택
-        int randomIndex = Random.Range(0, availableNumbers.Length);
-        return availableNumbers[randomIndex];
+        int GetRandomNumberExcluding(int excludedNumber)
+        {
+            int[] availableNumbers = new int[6];
+            int index = 0;
+
+            for (int i = 1; i <= 7; i++)
+            {
+                if (i != excludedNumber)
+                {
+                    availableNumbers[index] = i;
+                    index++;
+                }
+            }
+
+            // 랜덤으로 하나 선택
+            int randomIndex = Random.Range(0, availableNumbers.Length);
+            return availableNumbers[randomIndex];
+        }
     }
 }
-/*
-if (Input.GetMouseButtonDown(0))
-{
-Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-RaycastHit hit;
-
-if (Physics.Raycast(ray, out hit))
-{
-    Vector3 pos = hit.point;
-
-    pos.y = 0f;
-
-    agentManager.StartToRun(pos);
-}
-}
-*/
