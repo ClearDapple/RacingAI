@@ -56,10 +56,10 @@ public class AgentManager: MonoBehaviour
             int index = 0;
             foreach (Ticket ticket in agentQueue)
             {
-                if (myPickSO.playerName.Split('_')[1] == ticket.Name.Split('_')[1])
+                if (myPickSO.PlayerName == ticket.Name)
                 {
-                    myPickSO.playerRank = index + 1;
-                    Debug.Log($"{ticket.Name}의 순위는 {myPickSO.playerRank}입니다.");
+                    myPickSO.PlayerRank = index + 1;
+                    Debug.Log($"{ticket.Name}의 순위는 {myPickSO.PlayerRank}입니다.");
                     //leaderboardRacingAI.uploadScore(index.ToString());
                     break;
                 }

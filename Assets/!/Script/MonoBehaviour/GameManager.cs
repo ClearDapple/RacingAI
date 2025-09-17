@@ -30,22 +30,6 @@ public class GameManager : MonoBehaviour
 
     public void OnGamePlayEndEvent()
     {
-        //string a1 = agentManager.rank1;
-        //string a2 = agentManager.rank2;
-        //string a3 = agentManager.rank3;
-        //string a4 = agentManager.rank4;
-        //string a5 = agentManager.rank5;
-        //string a6 = agentManager.rank6;
-        //string a7 = agentManager.rank7;
-
-        //uiManager.ScoreBoardText(a1, a2, a3, a4, a5, a6, a7);
-        //scoreBoard = $"1st ----- {agentManager.rank1}\r\n"
-        //           + $"2nd ----- {agentManager.rank2}\r\n"
-        //           + $"3rd ----- {agentManager.rank3}\r\n"
-        //           + $"4th ----- {agentManager.rank4}\r\n"
-        //           + $"5th ----- {agentManager.rank5}\r\n"
-        //           + $"6th ----- {agentManager.rank6}\r\n"
-        //           + $"7th ----- {agentManager.rank7}";
 
         ////순위 보여주기
 

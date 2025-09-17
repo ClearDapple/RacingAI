@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 using Label = UnityEngine.UIElements.Label;
 using UnityEngine.Events;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] MyPickSO myPickSO;
     [SerializeField] GameManager gameManager;
 
-    [SerializeField] private UIDocument uiDocument;
+    public List<Button> ListButton = new List<Button>();
 
+    [SerializeField] private UIDocument uiDocument;
     private VisualElement root;
 
     // AnimalConfirmPage 등록
@@ -62,29 +64,29 @@ public class UIManager : MonoBehaviour
         AIImg = root.Q<VisualElement>("AIImg");
 
         //body
-        var a1 = Animal1Button = root.Q<Button>("Agent_01");
-        var a2 = Animal2Button = root.Q<Button>("Agent_02");
-        var a3 = Animal3Button = root.Q<Button>("Agent_03");
-        var a4 = Animal4Button = root.Q<Button>("Agent_04");
-        var a5 = Animal5Button = root.Q<Button>("Agent_05");
-        var a6 = Animal6Button = root.Q<Button>("Agent_06");
-        var a7 = Animal7Button = root.Q<Button>("Agent_07");
+        var Agent_01 = Animal1Button = root.Q<Button>("Agent_01");
+        var Agent_02 = Animal2Button = root.Q<Button>("Agent_02");
+        var Agent_03 = Animal3Button = root.Q<Button>("Agent_03");
+        var Agent_04 = Animal4Button = root.Q<Button>("Agent_04");
+        var Agent_05 = Animal5Button = root.Q<Button>("Agent_05");
+        var Agent_06 = Animal6Button = root.Q<Button>("Agent_06");
+        var Agent_07 = Animal7Button = root.Q<Button>("Agent_07");
 
-        a1.clicked += () => { AnimalButton_clicked(a1); };
-        a2.clicked += () => { AnimalButton_clicked(a2); };
-        a3.clicked += () => { AnimalButton_clicked(a3); };
-        a4.clicked += () => { AnimalButton_clicked(a4); };
-        a5.clicked += () => { AnimalButton_clicked(a5); };
-        a6.clicked += () => { AnimalButton_clicked(a6); };
-        a7.clicked += () => { AnimalButton_clicked(a7); };
+        Agent_01.clicked += () => { AnimalButton_clicked(Agent_01); };
+        Agent_02.clicked += () => { AnimalButton_clicked(Agent_02); };
+        Agent_03.clicked += () => { AnimalButton_clicked(Agent_03); };
+        Agent_04.clicked += () => { AnimalButton_clicked(Agent_04); };
+        Agent_05.clicked += () => { AnimalButton_clicked(Agent_05); };
+        Agent_06.clicked += () => { AnimalButton_clicked(Agent_06); };
+        Agent_07.clicked += () => { AnimalButton_clicked(Agent_07); };
 
-        a1.style.backgroundImage = new StyleBackground(Animal1Img.texture);
-        a2.style.backgroundImage = new StyleBackground(Animal2Img.texture);
-        a3.style.backgroundImage = new StyleBackground(Animal3Img.texture);
-        a4.style.backgroundImage = new StyleBackground(Animal4Img.texture);
-        a5.style.backgroundImage = new StyleBackground(Animal5Img.texture);
-        a6.style.backgroundImage = new StyleBackground(Animal6Img.texture);
-        a7.style.backgroundImage = new StyleBackground(Animal7Img.texture);
+        ListButton.Add(Agent_01);
+        ListButton.Add(Agent_02);
+        ListButton.Add(Agent_03);
+        ListButton.Add(Agent_04);
+        ListButton.Add(Agent_05);
+        ListButton.Add(Agent_06);
+        ListButton.Add(Agent_07);
 
         //footer
         var b1 = AnimalConfirmPageConfirmButton = AnimalConfirmPage.Q<Button>("ConfirmButton");
@@ -138,8 +140,8 @@ public class UIManager : MonoBehaviour
         playerImg.style.backgroundImage = btn.style.backgroundImage;
         PlayerLabel.text = btn.name;
 
-        myPickSO.playerName = btn.name;
-        myPickSO.playerTexture = btn.style.backgroundImage.value.texture;
+        myPickSO.PlayerName = btn.name;
+        myPickSO.PlayerTexture = btn.style.backgroundImage.value.texture;
     }
 
     private void AnimalConfirmPageConfirmButton_clicked()
@@ -151,10 +153,15 @@ public class UIManager : MonoBehaviour
 
     private void AIConfirm()
     {
-        gameManager.SelectAgentNumber(myPickSO.playerName);
-        AILabel.text = myPickSO.AIName;
 
-        AIImg.style.backgroundImage = null; ////so참조해서이미지 정하기
+
+        gameManager.SelectAgentNumber(myPickSO.PlayerName);
+        string aiName = myPickSO.AIName;
+
+        AILabel.text = aiName;
+        //myPickSO.AITexture = ListButton[aiName].style.backgroundImage;
+
+        //AIImg.style.backgroundImage = myPickSO.AITexture;
 
         StartButton.visible = true;
     }
@@ -165,20 +172,24 @@ public class UIManager : MonoBehaviour
         OnGamePlayStartEvent?.Invoke();
     }
 
-    //public void ScoreBoardText()
-    //{
-    //    TitleLabel.text = 
+    public void OnGUI()
+    {
+        AddPopUp();
+    }
 
-    //    MainTextLabel.text = $"1st ----- {gameManager.agentManager.rank1}\r\n"
-    //                       + $"2nd ----- {agentManager.rank2}\r\n"
-    //                       + $"3rd ----- {agentManager.rank3}\r\n"
-    //                       + $"4th ----- {agentManager.rank4}\r\n"
-    //                       + $"5th ----- {agentManager.rank5}\r\n"
-    //                       + $"6th ----- {agentManager.rank6}\r\n"
-    //                       + $"7th ----- {agentManager.rank7}";
-    //    AddPopUp();
-    //}
+    public void ScoreBoardText()
+    {
+        //TitleLabel.text =
 
+        //MainTextLabel.text = $"1st ----- {gameManager.agentManager.rank1}\r\n"
+        //                   + $"2nd ----- {agentManager.rank2}\r\n"
+        //                   + $"3rd ----- {agentManager.rank3}\r\n"
+        //                   + $"4th ----- {agentManager.rank4}\r\n"
+        //                   + $"5th ----- {agentManager.rank5}\r\n"
+        //                   + $"6th ----- {agentManager.rank6}\r\n"
+        //                   + $"7th ----- {agentManager.rank7}";
+        AddPopUp();
+    }
 
 
     public void AddPopUp()
