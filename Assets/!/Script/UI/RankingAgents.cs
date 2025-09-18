@@ -22,43 +22,35 @@ public class RankingAgents : MonoBehaviour
     VisualElement root;
 
     MultiColumnListView listView;
-
+    Button closeButton;
 
     void Start()
     {
         root = uiDocument.rootVisualElement;
         listView = root.Q<MultiColumnListView>();
-
-        List<MyData> data = new List<MyData>();
-
-        for (int i = 0; i < 5; i++)
-        {
-            Sprite mySprite = Resources.Load<Sprite>("cat/cat");
-            MyData temp = new MyData("1", "2", mySprite);
-            data.Add(temp);
-        }
-        ShowRanking(data);
+        closeButton = root.Q<Button>("closeButton");
+        closeButton.clicked += () => { root.AddToClassList("PageSmallState"); };
     }
 
     public void ShowRanking(List<MyData> data)
     {
         List<MyData> myDataList = data;
         Debug.Log("myDataList.count " + myDataList.Count);
-
-        //listView.style.width = Length.Percent(100);
+      
 
         listView.columns.Add(new Column
         {
             name = "title",
             title = "이름",
-            width = 150,
+            width = Length.Percent(40),
             makeCell = () => 
             {
                 var label = new Label();
-                label.style.flexGrow = 1;
-                label.style.whiteSpace = WhiteSpace.Normal;
-                label.style.height = 100;
-                label.style.fontSize = 100;
+                label.style.flexGrow = 1;                                   // 셀 확장 가능
+                label.style.whiteSpace = WhiteSpace.Normal;                 // 줄바꿈 허용
+                label.style.height = new StyleLength(StyleKeyword.Auto);    // 자동 높이
+                label.style.fontSize = 16;
+                label.style.unityTextAlign = TextAnchor.MiddleLeft;
                 return label;
             },
             bindCell = (element, index) =>
@@ -71,14 +63,15 @@ public class RankingAgents : MonoBehaviour
         {
             name = "description",
             title = "걸린시간",
-            width = 250,
+            width = Length.Percent(30),
             makeCell = () =>
             {
                 var label = new Label();
-                label.style.flexGrow = 1;
-                label.style.whiteSpace = WhiteSpace.Normal;
-                label.style.height = 100;
-                label.style.fontSize = 100;
+                label.style.flexGrow = 1;                                // 셀 확장 가능
+                label.style.whiteSpace = WhiteSpace.Normal;              // 줄바꿈 허용
+                label.style.height = new StyleLength(StyleKeyword.Auto); // 자동 높이
+                label.style.fontSize = 16;
+                label.style.unityTextAlign = TextAnchor.MiddleLeft;
                 return label;
             },
             bindCell = (element, index) =>
@@ -91,16 +84,18 @@ public class RankingAgents : MonoBehaviour
         {
             name = "icon",
             title = "사진",
-            width = 300,
+            width = Length.Percent(30),
             makeCell = () => new Image { scaleMode = ScaleMode.ScaleToFit },
             bindCell = (element, index) =>
             {
                 var image = element as Image;
                 image.image = myDataList[index].Icon?.texture;
+                image.style.justifyContent = Justify.Center; // 세로 방향 가운데 정렬
+                image.style.alignItems = Align.Center;       // 가로 방향 가운데 정렬
             }
         });
 
-        listView.fixedItemHeight = 100;
+        listView.fixedItemHeight = 30;
         listView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
         listView.itemsSource = myDataList;
     }

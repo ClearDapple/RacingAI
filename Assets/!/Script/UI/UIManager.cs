@@ -112,9 +112,9 @@ public class UIManager : MonoBehaviour
     {
         WinLoseNoticePage.visible = false;
 
-        AnimalConfirmPage.AddToClassList("AnimalConfirmPageDownState");
-        WinLoseNoticePage.AddToClassList("WinLoseNoticePageInvisibleState");
-        WinLosePopUp.AddToClassList("WinLosePopUpSmallState");
+        AnimalConfirmPage.AddToClassList("PageDownState");
+        WinLoseNoticePage.AddToClassList("PageInvisibleState");
+        WinLosePopUp.AddToClassList("PageSmallState");
 
         initialize();
     }
@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
     {
         AnimalConfirmPage.visible = true;
 
-        AnimalConfirmPage.AddToClassList("AnimalConfirmPageDefaultState");
+        AnimalConfirmPage.AddToClassList("PageUpState");
         playerImg.style.backgroundImage = null;
         PlayerLabel.text = null;
         AIImg.style.backgroundImage = null;
@@ -156,10 +156,8 @@ public class UIManager : MonoBehaviour
 
 
         gameManager.SelectAgentNumber(myPickSO.PlayerName);
-        string aiName = myPickSO.AIName;
 
-        AILabel.text = aiName;
-        //myPickSO.AITexture = ListButton[aiName].style.backgroundImage;
+        //myPickSO.AITexture = ListButton[myPickSO.AIName].style.backgroundImage;
 
         //AIImg.style.backgroundImage = myPickSO.AITexture;
 
@@ -168,7 +166,7 @@ public class UIManager : MonoBehaviour
 
     private void GameStartButton_clicked()
     {
-        AnimalConfirmPage.RemoveFromClassList("AnimalConfirmPageDefaultState");
+        AnimalConfirmPage.RemoveFromClassList("PageUpState");
         OnGamePlayStartEvent?.Invoke();
     }
 
@@ -191,19 +189,18 @@ public class UIManager : MonoBehaviour
         AddPopUp();
     }
 
-
     public void AddPopUp()
     {
         WinLoseNoticePage.visible = true;
-        WinLoseNoticePage.AddToClassList("WinLoseNoticePageDefaultState");
-        WinLosePopUp.AddToClassList("WinLosePopUpDefaultState");
+        WinLoseNoticePage.AddToClassList("PageVisibleState");
+        WinLosePopUp.AddToClassList("PageBigState");
     }
 
     private void WinLoseNoticePageConfirmButton_clicked()
     {
         Debug.Log("ConfirmButton2_clicked");
-        WinLoseNoticePage.RemoveFromClassList("WinLoseNoticePageDefaultState");
-        WinLosePopUp.RemoveFromClassList("WinLosePopUpDefaultState");
+        WinLoseNoticePage.RemoveFromClassList("PageVisibleState");
+        WinLosePopUp.RemoveFromClassList("PageBigState");
         WinLoseNoticePage.visible = false;
         OnPopUpCloseEvent?.Invoke();
     }

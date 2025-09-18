@@ -1,41 +1,26 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/!/UI%20Toolkit/MainUI.uss?fileID=7433441132597879392&amp;guid=c5035a86c2db1e54aaf5e62c8ad91c60&amp;type=3#MainUI" />
-    <ui:VisualElement name="MainRoot" style="flex-grow: 1;">
-        <ui:VisualElement name="AnimalConfirmPage" class="AnimalConfirmPageDownState AnimalConfirmPageDefaultState" style="display: flex;">
-            <ui:VisualElement name="header" style="flex-grow: 1; flex-direction: row; height: 50%; width: 100%; align-items: stretch;">
-                <ui:VisualElement name="playerImg" style="flex-grow: 1; width: 30%; flex-direction: column; align-self: auto; align-content: auto; justify-content: flex-start; align-items: auto;" />
-                <ui:VisualElement name="TopLabel" style="flex-grow: 1; width: 40%; flex-direction: row; align-content: auto; justify-content: space-between; align-items: auto;">
-                    <ui:Label text="Player" name="PlayerLabel" />
-                    <ui:Label text="AI" name="AILabel" />
-                </ui:VisualElement>
-                <ui:VisualElement name="AIImg" style="flex-grow: 1; width: 30%; flex-direction: column; align-content: auto; justify-content: flex-start; align-self: auto; align-items: auto;" />
+    <ui:VisualElement name="AgentConfirmPage" style="display: flex; flex-shrink: 0; width: 100%; height: 100%; visibility: visible;">
+        <ui:VisualElement name="header" style="flex-grow: 1; flex-direction: row; height: 50%; width: 100%; align-items: stretch;">
+            <ui:VisualElement name="playerImg" style="flex-grow: 1; width: 30%; flex-direction: column; align-self: auto; align-content: auto; justify-content: flex-start; align-items: auto;" />
+            <ui:VisualElement name="TopLabel" style="flex-grow: 1; width: 40%; flex-direction: row; align-content: auto; justify-content: space-between; align-items: auto;">
+                <ui:Label text="Player" name="PlayerLabel" />
+                <ui:Label text="AI" name="AILabel" />
             </ui:VisualElement>
-            <ui:VisualElement name="body" style="flex-grow: 1; width: 100%; height: 30%; flex-direction: row; align-self: auto; align-items: center; align-content: auto; justify-content: space-evenly;">
-                <ui:Button name="Agent_01" style="width: 100px; height: 100px;" />
-                <ui:Button name="Agent_02" style="width: 100px; height: 100px;" />
-                <ui:Button name="Agent_03" style="width: 100px; height: 100px;" />
-                <ui:Button name="Agent_04" style="width: 100px; height: 100px;" />
-                <ui:Button name="Agent_05" style="height: 100px; width: 100px;" />
-                <ui:Button name="Agent_06" style="width: 100px; height: 100px;" />
-                <ui:Button name="Agent_07" style="height: 100px; width: 100px;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="footer" style="flex-grow: 1; height: 20%; width: 100%; justify-content: space-around; align-items: center; flex-direction: row; align-self: center; align-content: center;">
-                <ui:Button text="Confirm" name="ConfirmButton" style="width: 40%;" />
-                <ui:Button text="GameStart" name="GameStartButton" style="width: 40%;" />
-            </ui:VisualElement>
+            <ui:VisualElement name="AIImg" style="flex-grow: 1; width: 30%; flex-direction: column; align-content: auto; justify-content: flex-start; align-self: auto; align-items: auto;" />
         </ui:VisualElement>
-        <ui:VisualElement name="WinLoseNoticePage" enabled="true" class="WinLoseNoticePageInvisibleState WinLoseNoticePageDefaultState" style="display: flex; overflow: visible; visibility: visible;">
-            <ui:VisualElement name="WinLosePopUp" class="WinLosePopUpSmallState WinLosePopUpDefaultState">
-                <ui:VisualElement name="header" style="flex-grow: 0; width: 100%; height: 30%; flex-shrink: 0; align-items: center; justify-content: center; background-size: 100% 100%; background-color: rgb(252, 249, 234);">
-                    <ui:Label text="Title" name="TitleLabel" style="font-size: 32px; -unity-text-align: middle-center; -unity-font-style: bold; width: 60%; height: 80%;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="body" style="flex-grow: 0; width: 100%; height: 50%; flex-shrink: 0; align-items: center; justify-content: center; background-color: rgb(187, 223, 219);">
-                    <ui:Label text="MainText" name="MainTextLabel" style="width: 100%; height: 100%; align-items: auto; justify-content: flex-start; align-content: auto; -unity-text-align: upper-left;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="Bot" style="flex-grow: 0; width: 100%; height: 20%; flex-shrink: 0; align-items: center; justify-content: center; background-color: rgb(255, 197, 160);">
-                    <ui:Button name="ConfirmButton" style="height: 50%; width: 20%; background-color: rgb(249, 169, 120);" />
-                </ui:VisualElement>
-            </ui:VisualElement>
+        <ui:VisualElement name="body" style="flex-grow: 1; width: 100%; height: 30%; flex-direction: row; align-self: auto; align-items: center; align-content: auto; justify-content: space-evenly;">
+            <ui:Button name="Agent_01" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_02" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_03" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_04" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_05" style="height: 100px; width: 100px;" />
+            <ui:Button name="Agent_06" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_07" style="height: 100px; width: 100px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="footer" style="flex-grow: 1; height: 20%; width: 100%; justify-content: space-around; align-items: center; flex-direction: row; align-self: center; align-content: center;">
+            <ui:Button text="Confirm" name="ConfirmButton" style="width: 40%;" />
+            <ui:Button text="GameStart" name="GameStartButton" style="width: 40%;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

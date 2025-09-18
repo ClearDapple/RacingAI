@@ -1,7 +1,7 @@
 :root {
 }
 
-.AnimalConfirmPageDownState {
+.PageDownState {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -11,12 +11,12 @@
     transition-duration: 0.5s;
 }
 
-.AnimalConfirmPageDefaultState {
+.PageUpState {
     opacity: 1;
     translate: 0 0%;
 }
 
-.WinLosePopUpSmallState {
+.PageSmallState {
     flex-grow: 0;
     background-color: rgba(255, 255, 255, 0);
     background-size: 50% 50%;
@@ -29,11 +29,11 @@
     scale: 0 0;
 }
 
-.WinLosePopUpDefaultState {
+.PageBigState {
     scale: 1 1;
 }
 
-.WinLoseNoticePageInvisibleState {
+.PageInvisibleState {
     transition-duration: 0.25s;
     position: absolute;
     flex-shrink: 0;
@@ -47,6 +47,6 @@
     opacity: 1;
 }
 
-.WinLoseNoticePageDefaultState {
+.PageVisibleState {
     background-color: rgba(0, 0, 0, 0.59);
 }

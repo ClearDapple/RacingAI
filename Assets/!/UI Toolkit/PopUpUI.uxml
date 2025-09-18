@@ -1,0 +1,16 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/!/UI%20Toolkit/MainUI.uss?fileID=7433441132597879392&amp;guid=c5035a86c2db1e54aaf5e62c8ad91c60&amp;type=3#MainUI" />
+    <ui:VisualElement name="WinLoseNoticePage" enabled="true" style="display: flex; overflow: visible; visibility: visible; flex-shrink: 0; position: relative; width: 100%; height: 100%; align-items: center; justify-content: center;">
+        <ui:VisualElement name="WinLosePopUp" class="WinLosePopUpSmallState WinLosePopUpDefaultState" style="width: 80%; height: 80%;">
+            <ui:VisualElement name="header" style="flex-grow: 0; width: 100%; height: 30%; flex-shrink: 0; align-items: center; justify-content: center; background-size: 100% 100%; background-color: rgb(252, 249, 234);">
+                <ui:Label text="Title" name="TitleLabel" style="font-size: 32px; -unity-text-align: middle-center; -unity-font-style: bold; width: 60%; height: 80%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="body" style="flex-grow: 0; width: 100%; height: 50%; flex-shrink: 0; align-items: center; justify-content: center; background-color: rgb(187, 223, 219);">
+                <ui:Label text="MainText" name="MainTextLabel" style="width: 100%; height: 100%; align-items: auto; justify-content: flex-start; align-content: auto; -unity-text-align: upper-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Bot" style="flex-grow: 0; width: 100%; height: 20%; flex-shrink: 0; align-items: center; justify-content: center; background-color: rgb(255, 197, 160);">
+                <ui:Button name="ConfirmButton" style="height: 50%; width: 20%; background-color: rgb(249, 169, 120);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

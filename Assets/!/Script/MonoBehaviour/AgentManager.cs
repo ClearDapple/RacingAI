@@ -65,6 +65,9 @@ public class AgentManager: MonoBehaviour
                 }
                 index++;
             }
+            //TODO;  List<MyData> data
+            // ShowRanking(data);
+
             agentQueue.Clear();
             OnGamePlayEndEvent?.Invoke();
         }
