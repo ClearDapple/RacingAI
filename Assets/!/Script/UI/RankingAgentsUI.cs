@@ -16,7 +16,7 @@ public class MyData
     }
 }
 
-public class RankingAgents : MonoBehaviour
+public class RankingAgentsUI : MonoBehaviour
 {
     [SerializeField] UIDocument uiDocument;
     VisualElement root;
@@ -24,26 +24,45 @@ public class RankingAgents : MonoBehaviour
     MultiColumnListView listView;
     Button closeButton;
 
-    void Start()
+
+    private void Awake()
     {
         root = uiDocument.rootVisualElement;
         listView = root.Q<MultiColumnListView>();
         closeButton = root.Q<Button>("closeButton");
-        closeButton.clicked += () => { root.AddToClassList("PageSmallState"); };
+        closeButton.clicked += () => { CloseButton_clicked(); };
     }
+
+    void Start()
+    {
+        root.AddToClassList("PageSmallState");
+        Show();
+    }
+
+    public void Show()
+    {
+        listView.visible = true;
+        root.AddToClassList("PageBigState");
+    }
+
+    public void Hide()
+    {
+        root.RemoveFromClassList("PageBigState");
+        listView.visible = false;
+    }
+
 
     public void ShowRanking(List<MyData> data)
     {
         List<MyData> myDataList = data;
         Debug.Log("myDataList.count " + myDataList.Count);
-      
 
         listView.columns.Add(new Column
         {
             name = "title",
             title = "이름",
             width = Length.Percent(40),
-            makeCell = () => 
+            makeCell = () =>
             {
                 var label = new Label();
                 label.style.flexGrow = 1;                                   // 셀 확장 가능
@@ -98,5 +117,10 @@ public class RankingAgents : MonoBehaviour
         listView.fixedItemHeight = 30;
         listView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
         listView.itemsSource = myDataList;
+    }
+
+    private void CloseButton_clicked()
+    {
+        Hide();
     }
 }
