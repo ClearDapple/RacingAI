@@ -1,14 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MyData
+public class RankingData
 {
     public string Name { get; set; }
     public string Time { get; set; }
     public Sprite Icon { get; set; }
 
-    public MyData(string name, string time, Sprite icon)
+    public RankingData(string name, string time, Sprite icon)
     {
         Name = name;
         Time = time;
@@ -18,6 +19,8 @@ public class MyData
 
 public class RankingAgentsUI : MonoBehaviour
 {
+    public static event Action OnGameResetEvent;
+
     [SerializeField] UIDocument uiDocument;
     VisualElement root;
 
@@ -31,30 +34,23 @@ public class RankingAgentsUI : MonoBehaviour
         listView = root.Q<MultiColumnListView>();
         closeButton = root.Q<Button>("closeButton");
         closeButton.clicked += () => { CloseButton_clicked(); };
+        PopUpUI.OnLeaderboardShowEvent += PopUpUI_OnLeaderboardShowEvent;
     }
 
     void Start()
     {
         root.AddToClassList("PageSmallState");
+        Hide();
+    }
+
+    private void PopUpUI_OnLeaderboardShowEvent()
+    {
         Show();
     }
 
-    public void Show()
+    public void ShowRanking(List<RankingData> data)
     {
-        listView.visible = true;
-        root.AddToClassList("PageBigState");
-    }
-
-    public void Hide()
-    {
-        root.RemoveFromClassList("PageBigState");
-        listView.visible = false;
-    }
-
-
-    public void ShowRanking(List<MyData> data)
-    {
-        List<MyData> myDataList = data;
+        List<RankingData> myDataList = data;
         Debug.Log("myDataList.count " + myDataList.Count);
 
         listView.columns.Add(new Column
@@ -122,5 +118,17 @@ public class RankingAgentsUI : MonoBehaviour
     private void CloseButton_clicked()
     {
         Hide();
+        OnGameResetEvent?.Invoke();
+    }
+
+    public void Show()
+    {
+        listView.visible = true;
+        root.AddToClassList("PageBigState");
+    }
+    public void Hide()
+    {
+        root.RemoveFromClassList("PageBigState");
+        listView.visible = false;
     }
 }

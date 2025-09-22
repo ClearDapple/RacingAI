@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SocialPlatforms.Impl;
 using static Agent;
+using Action = System.Action;
 using Random = UnityEngine.Random;
 
 public class AgentManager: MonoBehaviour
 {
-    public UnityEvent OnGamePlayEndEvent;
+    public static event Action<RankingData> OnShowRankingEvent;
+    public static event Action OnGamePlayEndEvent;
 
     [SerializeField] MyPickSO myPickSO;
+    [SerializeField] RankingAgentsUI rankingAgentsUI;
     private List<GameObject> arrivalList = new List<GameObject>();
     private List<int> rank;
 
@@ -43,13 +43,15 @@ public class AgentManager: MonoBehaviour
     private void CollectAgets(Ticket ticket)
     {
         agentQueue.Enqueue(ticket);
-        arrivalList.Add(ticket.Obj);
+        //arrivalList.Add(ticket.Obj);
         Debug.Log($"{arrivalList.Count} : {ticket.Name}({ticket.ElapsedTime})");
         CheckAllAgents();
     }
 
     private void CheckAllAgents()
     {
+        List<RankingData> Data = new List<RankingData>();
+        
         if (agentQueue.Count == agents.Length)
         {
             Debug.Log("전부 도착함");
@@ -64,9 +66,10 @@ public class AgentManager: MonoBehaviour
                     break;
                 }
                 index++;
+                RankingData sample = new RankingData(ticket.Name, ticket.ElapsedTime.ToString(), ticket.Img);
+                Data.Add(sample);
             }
-            //TODO;  List<MyData> data
-            // ShowRanking(data);
+            rankingAgentsUI.ShowRanking(Data);
 
             agentQueue.Clear();
             OnGamePlayEndEvent?.Invoke();

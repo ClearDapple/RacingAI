@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PopUpUI : MonoBehaviour
 {
+    public static Action OnLeaderboardShowEvent;
+
     [SerializeField] private UIDocument uiDocument;
     private VisualElement root;
     private VisualElement WinLoseNoticePage, WinLosePopUp;
@@ -22,6 +25,13 @@ public class PopUpUI : MonoBehaviour
         var a1 = root.Q<Button>("ConfirmButton");
         a1.clicked += () => { ConfirmButton_clicked(); };
         #endregion
+
+        AgentManager.OnGamePlayEndEvent += AgentManager_OnGamePlayEndEvent;
+    }
+
+    private void AgentManager_OnGamePlayEndEvent()
+    {
+        Show();
     }
 
     private void Start()
@@ -45,14 +55,9 @@ public class PopUpUI : MonoBehaviour
         WinLoseNoticePage.visible = false;
     }
 
-    public void AddPopUp()
-    {
-        Show();
-    }
-
     private void ConfirmButton_clicked()
     {
-        Debug.Log("ConfirmButton2_clicked");
         Hide();
+        OnLeaderboardShowEvent?.Invoke();
     }
 }

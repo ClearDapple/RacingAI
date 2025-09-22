@@ -1,4 +1,5 @@
 using System;
+using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -8,6 +9,7 @@ public class Agent : MonoBehaviour
     Action<Ticket> agentCallbackAction;
 
     [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private Sprite sp;
     private VisualElement root;
     private Label head, body, foot;
 
@@ -17,18 +19,28 @@ public class Agent : MonoBehaviour
     public float startTime;
     public float elapsedTime;
 
+    private int speed;
+    public int Speed
+    {
+        get { return speed; }
+        set
+        {
+
+        }
+    }
+
 
     public struct Ticket
     {
         public float ElapsedTime;
         public string Name;
-        public GameObject Obj;
+        public Sprite Img;
 
-        public Ticket(float time, string name, GameObject obj)
+        public Ticket(float time, string name, Sprite img)
         {
             this.ElapsedTime = time;
             this.Name = name;
-            this.Obj = obj;
+            this.Img = img;
         }
     }
 
@@ -74,7 +86,7 @@ public class Agent : MonoBehaviour
             elapsedTime = Time.time - startTime;
             
             Debug.Log("µµÂøÇÔ");
-            agentCallbackAction(new Ticket(elapsedTime, this.gameObject.name, this.gameObject));
+            agentCallbackAction(new Ticket(elapsedTime, this.gameObject.name, sp));
 
              agent.Warp(orignalPos);
         }

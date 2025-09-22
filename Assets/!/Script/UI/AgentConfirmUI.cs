@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class AgentConfirmUI : MonoBehaviour
 {
-    public UnityEvent OnGamePlayStartEvent;
+    public static event Action OnGamePlayStartEvent;
 
     [SerializeField] MyPickSO myPickSO;
 
@@ -13,12 +14,11 @@ public class AgentConfirmUI : MonoBehaviour
     #region
     [SerializeField] private UIDocument uiDocument;
     private VisualElement root;
-    private VisualElement AnimalConfirmPage;
+    private VisualElement AgentConfirmPage;
 
     private Label PlayerLabel, AILabel;
     private VisualElement playerImg, AIImg;
-    public Sprite Animal1Img, Animal2Img, Animal3Img, Animal4Img, Animal5Img, Animal6Img, Animal7Img;
-    private Button Agent1Button, Agent2Button, Agent3Button, Agent4Button, Agent5Button, Agent6Button, Agent7Button;
+    public Sprite Agent1Img, Agent2Img, Agent3Img, Agent4Img, Agent5Img, Agent6Img, Agent7Img;
 
     private Button ConfirmButton, StartButton;
     #endregion
@@ -30,7 +30,7 @@ public class AgentConfirmUI : MonoBehaviour
     {
         #region
         root = uiDocument.rootVisualElement;
-        AnimalConfirmPage = root.Q<VisualElement>("AnimalConfirmPage");
+        AgentConfirmPage = root.Q<VisualElement>("AgentConfirmPage");
 
         //header
         playerImg = root.Q<VisualElement>("playerImg");
@@ -39,13 +39,13 @@ public class AgentConfirmUI : MonoBehaviour
         AIImg = root.Q<VisualElement>("AIImg");
 
         //body
-        var Agent_01 = Agent1Button = root.Q<Button>("Agent_01");
-        var Agent_02 = Agent2Button = root.Q<Button>("Agent_02");
-        var Agent_03 = Agent3Button = root.Q<Button>("Agent_03");
-        var Agent_04 = Agent4Button = root.Q<Button>("Agent_04");
-        var Agent_05 = Agent5Button = root.Q<Button>("Agent_05");
-        var Agent_06 = Agent6Button = root.Q<Button>("Agent_06");
-        var Agent_07 = Agent7Button = root.Q<Button>("Agent_07");
+        var Agent_01 = root.Q<Button>("Agent_01");
+        var Agent_02 = root.Q<Button>("Agent_02");
+        var Agent_03 = root.Q<Button>("Agent_03");
+        var Agent_04 = root.Q<Button>("Agent_04");
+        var Agent_05 = root.Q<Button>("Agent_05");
+        var Agent_06 = root.Q<Button>("Agent_06");
+        var Agent_07 = root.Q<Button>("Agent_07");
 
         Agent_01.clicked += () => { AgentButton_clicked(Agent_01); };
         Agent_02.clicked += () => { AgentButton_clicked(Agent_02); };
@@ -70,24 +70,18 @@ public class AgentConfirmUI : MonoBehaviour
         b1.clicked += () => { ConfirmButton_clicked(); };
         b2.clicked += () => { GameStartButton_clicked(); };
         #endregion
+        RankingAgentsUI.OnGameResetEvent += RankingAgentsUI_OnGameResetEvent;
     }
 
     private void Start()
     {
-        AnimalConfirmPage.AddToClassList("PageDownState");
+        AgentConfirmPage.AddToClassList("PageDownState");
         initialize();
     }
 
-    public void Show()
+    private void RankingAgentsUI_OnGameResetEvent()
     {
-        AnimalConfirmPage.visible = true;
-        AnimalConfirmPage.AddToClassList("PageUpState");
-    }
-
-    public void Hide()
-    {
-        AnimalConfirmPage.RemoveFromClassList("PageUpState");
-        AnimalConfirmPage.visible = false;
+        initialize();
     }
 
     public void initialize()
@@ -103,6 +97,18 @@ public class AgentConfirmUI : MonoBehaviour
         AllButtonsVisibleTrue();
         ConfirmButton.visible = false;
         StartButton.visible = false;
+    }
+
+    public void Show()
+    {
+        AgentConfirmPage.visible = true;
+        AgentConfirmPage.AddToClassList("PageUpState");
+    }
+
+    public void Hide()
+    {
+        AgentConfirmPage.RemoveFromClassList("PageUpState");
+        AgentConfirmPage.visible = false;
     }
 
     private void AgentButton_clicked(Button btn)
@@ -126,32 +132,28 @@ public class AgentConfirmUI : MonoBehaviour
     private void AIConfirm()
     {
         SelectAgentNumber(myPickSO.PlayerName);
-        //so의 정보를 집어넣기.
-        //myPickSO.AITexture = ListButton[myPickSO.AIName].style.backgroundImage;
-        //AIImg.style.backgroundImage = myPickSO.AITexture;
+
+        AILabel.text = myPickSO.AIName;
+        AIImg.style.backgroundImage = myPickSO.AITexture;
+
         StartButton.visible = true;
     }
 
     private void GameStartButton_clicked()
     {
         Hide();
-        //OnGamePlayStartEvent?.Invoke();
+        OnGamePlayStartEvent?.Invoke();
     }
 
     public void SelectAgentNumber(string playerAgentName)
     {
-        int playerAgentNumber = int.Parse(name.Split('_')[1]);
+        Debug.Log("playerAgentName: " + playerAgentName);
+        int playerAgentNumber = int.Parse(playerAgentName.Split('_')[1]);
 
         int randomNumber = GetRandomNumberExcluding(playerAgentNumber);
 
-        if (randomNumber < 10)
-        {
-            myPickSO.AIName = $"Agent_0{randomNumber}";
-        }
-        else
-        {
-            myPickSO.AIName = $"Agent_{randomNumber}";
-        }
+        myPickSO.AIName = ListButton[randomNumber - 1].name;
+        myPickSO.AITexture = ListButton[randomNumber - 1].style.backgroundImage.value.texture;
 
         int GetRandomNumberExcluding(int excludedNumber)
         {
@@ -172,7 +174,6 @@ public class AgentConfirmUI : MonoBehaviour
             return availableNumbers[randomIndex];
         }
     }
-
     void AllButtonsVisibleTrue()
     {
         foreach (Button btn in ListButton)
