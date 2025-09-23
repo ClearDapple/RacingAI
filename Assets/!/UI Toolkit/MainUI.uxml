@@ -10,13 +10,13 @@
             <ui:VisualElement name="AIImg" style="flex-grow: 1; width: 30%; flex-direction: column; align-content: auto; justify-content: flex-start; align-self: auto; align-items: auto;" />
         </ui:VisualElement>
         <ui:VisualElement name="body" style="flex-grow: 1; width: 100%; height: 30%; flex-direction: row; align-self: auto; align-items: center; align-content: auto; justify-content: space-evenly;">
-            <ui:Button name="Agent_01" style="width: 100px; height: 100px;" />
-            <ui:Button name="Agent_02" style="width: 100px; height: 100px;" />
-            <ui:Button name="Agent_03" style="width: 100px; height: 100px;" />
-            <ui:Button name="Agent_04" style="width: 100px; height: 100px;" />
-            <ui:Button name="Agent_05" style="height: 100px; width: 100px;" />
-            <ui:Button name="Agent_06" style="width: 100px; height: 100px;" />
-            <ui:Button name="Agent_07" style="height: 100px; width: 100px;" />
+            <ui:Button name="Agent_01" icon-image="project://database/Assets/!/Sprite/cat.jpg?fileID=2800000&amp;guid=ac323f0c393a3734e8dc2f156ce061e7&amp;type=3#cat" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_02" icon-image="project://database/Assets/!/Sprite/dog.jpg?fileID=2800000&amp;guid=1e23bd180e8a40e49bd0176957e851d8&amp;type=3#dog" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_03" icon-image="project://database/Assets/!/Sprite/dragon.jpg?fileID=2800000&amp;guid=5a5927ec7a50bf44296594e49d1c1f3f&amp;type=3#dragon" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_04" icon-image="project://database/Assets/!/Sprite/mon.png?fileID=2800000&amp;guid=874648e79e582c348b6a2fda27e2a5b6&amp;type=3#mon" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_05" icon-image="project://database/Assets/!/Sprite/nuguri.jpg?fileID=2800000&amp;guid=2997f8be5ee49cd4c8c3576b59eec01c&amp;type=3#nuguri" style="height: 100px; width: 100px;" />
+            <ui:Button name="Agent_06" icon-image="project://database/Assets/!/Sprite/rabit.jpg?fileID=2800000&amp;guid=79259ed22a7407842a979a20128428a7&amp;type=3#rabit" style="width: 100px; height: 100px;" />
+            <ui:Button name="Agent_07" icon-image="project://database/Assets/!/Sprite/rat.gif?fileID=2800000&amp;guid=a9b46ef31faaf8441bd2b74057bfe7d8&amp;type=3#rat" style="height: 100px; width: 100px;" />
         </ui:VisualElement>
         <ui:VisualElement name="footer" style="flex-grow: 1; height: 20%; width: 100%; justify-content: space-around; align-items: center; flex-direction: row; align-self: center; align-content: center;">
             <ui:Button text="Confirm" name="ConfirmButton" style="width: 40%;" />

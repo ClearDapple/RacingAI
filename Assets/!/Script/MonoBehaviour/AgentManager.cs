@@ -63,7 +63,7 @@ public class AgentManager: MonoBehaviour
                     myPickSO.PlayerRank = index + 1;
                     Debug.Log($"{ticket.Name}의 순위는 {myPickSO.PlayerRank}입니다.");
                     //leaderboardRacingAI.uploadScore(index.ToString());
-                    break;
+                   // break;
                 }
                 index++;
                 RankingData sample = new RankingData(ticket.Name, ticket.ElapsedTime.ToString(), ticket.Img);

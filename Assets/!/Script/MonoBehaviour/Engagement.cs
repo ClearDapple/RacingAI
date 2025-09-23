@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Engagement : MonoBehaviour
 {
+    [SerializeField] RadiusRenderer radiusRenderer;
+
     public GameObject bulletPrefab;
     public Transform player;
     public Transform firePoint;
@@ -10,6 +12,7 @@ public class Engagement : MonoBehaviour
 
     public float bulletSpeed = 20f;
     public float rotationSpeed = 5f;
+    public float detectionRange = 15f;
 
 
     void Start()
@@ -18,19 +21,30 @@ public class Engagement : MonoBehaviour
         {
             player = this.transform;
         }
+
+        radiusRenderer.SetRadius(detectionRange);
     }
 
     void Update()
     {
         Transform nearestTarget = FindNearestTarget(player);
 
-        if (nearestTarget != null)
+        if (nearestTarget == null) return;
+
+        float distanceToNearest = Vector3.Distance(player.position, nearestTarget.position);
+
+        if (distanceToNearest <= detectionRange)
         {
+            radiusRenderer.SetColor(Color.red);
             if (Input.GetMouseButtonDown(0)) // Left click
             {
                 RotateTowardsTarget(player, nearestTarget, rotationSpeed);
                 FireAtPoint(nearestTarget.transform.position);
             }
+        }
+        else
+        {
+            radiusRenderer.SetColor(Color.green);
         }
     }
 
@@ -68,5 +82,5 @@ public class Engagement : MonoBehaviour
         rb.linearVelocity = direction * bulletSpeed;
 
         Destroy(bullet, 1f);
-    }
+    }   
 }

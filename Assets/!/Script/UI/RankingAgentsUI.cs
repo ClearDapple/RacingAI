@@ -112,6 +112,8 @@ public class RankingAgentsUI : MonoBehaviour
 
         listView.fixedItemHeight = 30;
         listView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
+        listView.itemsSource = null;
+        listView.RefreshItems();
         listView.itemsSource = myDataList;
     }
 

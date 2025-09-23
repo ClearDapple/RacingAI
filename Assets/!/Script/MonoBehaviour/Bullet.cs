@@ -7,8 +7,16 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        collision.gameObject.GetComponent<Agent>().Speed--;
-        OnHitContactEvent?.Invoke(collision.gameObject.transform.position);
+        try
+        {
+            collision.gameObject.GetComponent<Agent>().Speed--;
+            collision.gameObject.GetComponent<TargetWobble>().TriggerWobble();
+            OnHitContactEvent?.Invoke(collision.gameObject.transform.position);
+        }
+        catch (Exception)
+        {
+            Debug.Log("충돌한 오브젝트에 Agent 컴포넌트가 없습니다.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,6 +24,7 @@ public class Bullet : MonoBehaviour
         try
         {
             other.gameObject.GetComponent<Agent>().Speed--;
+            other.gameObject.GetComponent<TargetWobble>().TriggerWobble();
             OnHitContactEvent?.Invoke(other.gameObject.transform.position);
         }
         catch (Exception)
