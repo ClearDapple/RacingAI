@@ -1,12 +1,13 @@
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
+
 public class RadiusRenderer : MonoBehaviour
 {
     private LineRenderer line;
     
     public int segments = 100;
-    public float radius = 5f;
+    public float radius;
 
 
     void Start()
@@ -15,9 +16,7 @@ public class RadiusRenderer : MonoBehaviour
         line.positionCount = segments + 1;
         line.loop = true;
 
-        line.material.color = Color.red;
-        line.startColor = Color.red;
-        line.endColor = Color.red;
+        SetColor(Color.green);
     }
 
     void Update()

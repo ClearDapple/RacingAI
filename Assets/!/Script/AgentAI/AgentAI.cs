@@ -1,9 +1,10 @@
-using System;
 using UnityEngine;
 
-public class Engagement : MonoBehaviour
+public class AgentAI : MonoBehaviour
 {
-    [SerializeField] RadiusRenderer radiusRenderer;
+    IAgentState currentState;
+
+    public RadiusRenderer radiusRenderer;
 
     public GameObject bulletPrefab;
     public Transform player;
@@ -12,8 +13,9 @@ public class Engagement : MonoBehaviour
 
     public float bulletSpeed = 20f;
     public float rotationSpeed = 5f;
-    public float detectionRange = 10f;
 
+    public float detectionRange = 10f;
+    public int bulletCount = 10;
 
     void Start()
     {
@@ -21,8 +23,8 @@ public class Engagement : MonoBehaviour
         {
             player = this.transform;
         }
-
         radiusRenderer.SetRadius(detectionRange);
+        ChangeState(new IdleState());
     }
 
     void Update()
@@ -39,21 +41,9 @@ public class Engagement : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0)) // Left click
             {
-                RotateTowardsTarget(player, nearestTarget, rotationSpeed);
-                FireAtPoint(nearestTarget.transform.position);
+                //atcakk
             }
         }
-        else
-        {
-            radiusRenderer.SetColor(Color.green);
-        }
-    }
-
-    void RotateTowardsTarget(Transform player, Transform target, float rotationSpeed)
-    {
-        Vector3 direction = (target.position - player.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 
     Transform FindNearestTarget(Transform player)
@@ -74,8 +64,20 @@ public class Engagement : MonoBehaviour
         return nearestTarget;
     }
 
-    public void FireAtPoint(Vector3 targetPoint)
+    public void RotateTowardsTarget()
     {
+        Transform player = this.transform;
+        Vector3 target = FindNearestTarget(gameObject.transform).position;
+
+        Vector3 direction = (target - player.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+
+    public void FireAtPoint()
+    {
+        Vector3 targetPoint = FindNearestTarget(gameObject.transform).position;
+
         Vector3 direction = (targetPoint - firePoint.position).normalized;
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(direction));
@@ -83,5 +85,44 @@ public class Engagement : MonoBehaviour
         rb.linearVelocity = direction * bulletSpeed;
 
         Destroy(bullet, 1f);
-    }   
+    }
+
+    public void ChangeState(IAgentState newState)
+    {
+        currentState?.Exit(this);
+
+        currentState = newState;
+        currentState?.Enter(this);
+        currentState?.Execute(this);
+    }
+
+    public bool IsTargetNearby()
+    {
+        bool isNearby = false;
+
+        if (true) { isNearby = true; }
+        else { isNearby = false; }
+        //로직 추가
+        return isNearby;
+    }
+
+    public bool IsTargetCloseEnough()
+    {
+        bool isCloseEnough = false;
+
+        if (true) { isCloseEnough = true; }
+        else { isCloseEnough = false; }
+        //로직 추가
+        return isCloseEnough;
+    }
+
+    public void PerformAttack()
+    {
+        //공격
+    }
+
+    public void DestroySelf()
+    {
+        //Destroy(gameObject);
+    }
 }
