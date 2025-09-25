@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
+//[RequireComponent(typeof(LineRenderer))]
 
 public class RadiusRenderer : MonoBehaviour
 {
@@ -15,8 +15,6 @@ public class RadiusRenderer : MonoBehaviour
         line = GetComponent<LineRenderer>();
         line.positionCount = segments + 1;
         line.loop = true;
-
-        SetColor(Color.green);
     }
 
     void Update()
@@ -36,9 +34,31 @@ public class RadiusRenderer : MonoBehaviour
     {
         radius = newRadius;
     }
-
-    public void SetColor(Color lineColor)
+    public void SetColor(Color nulll)
     {
-        line.material.color = lineColor;
+        
+    }
+
+    public void SetColor(IAgentState state)
+    {
+        switch(state)
+        {
+            case IdleState:
+                line.material.color = Color.lightSeaGreen;
+                break;
+            case AlertState:
+                line.material.color = Color.orangeRed;
+
+                break;
+            case AttackState:
+                line.material.color = Color.violetRed;
+                break;
+            case DeadState:
+                line.material.color = Color.darkSlateGray;
+                break;
+            default:
+                line.material.color = Color.lightCyan;
+                break;
+        }
     }
 }

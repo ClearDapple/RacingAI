@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5231485388357001301}
   - component: {fileID: 4503496734211908617}
   - component: {fileID: 6235935194949162057}
-  - component: {fileID: 1178110573022544464}
   - component: {fileID: -7198768589277922190}
+  - component: {fileID: 1178110573022544464}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -115,18 +115,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1178110573022544464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87493999655827006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd12165d7fe934e4a8c49733eeb62831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
 --- !u!54 &-7198768589277922190
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +142,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1178110573022544464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87493999655827006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd12165d7fe934e4a8c49733eeb62831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet

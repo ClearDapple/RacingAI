@@ -1,10 +1,9 @@
-using UnityEngine;
 
 public class IdleState : IAgentState
 {
     public void Enter(AgentAI agentAI)
     {
-        agentAI.radiusRenderer.SetColor(Color.green);
+        agentAI.radiusRenderer.SetColor(new IdleState());
     }
     public void Execute(AgentAI agentAI)
     {

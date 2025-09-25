@@ -1,10 +1,15 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class AgentAI : MonoBehaviour
 {
     IAgentState currentState;
 
+    public static event Action<Vector3> OnTurretDestroySelfEvent;
+
     public RadiusRenderer radiusRenderer;
+    public GameObject targetObj;
 
     public GameObject bulletPrefab;
     public Transform player;
@@ -23,25 +28,47 @@ public class AgentAI : MonoBehaviour
         {
             player = this.transform;
         }
+        targetObj.GetComponent<Rigidbody>().useGravity = false;
+        targetObj.GetComponent<BoxCollider>().enabled = false;
         radiusRenderer.SetRadius(detectionRange);
         ChangeState(new IdleState());
+        bulletCount = 10;
     }
 
     void Update()
     {
         Transform nearestTarget = FindNearestTarget(player);
 
-        if (nearestTarget == null) return;
+        //dead State Check
+        if (bulletCount <= 0)
+        {
+            ChangeState(new DeadState());
+            return;
+        }
+
+        //idle State Check
+        if (nearestTarget == null)
+        {
+            ChangeState(new IdleState());
+            return;
+        }
 
         float distanceToNearest = Vector3.Distance(player.position, nearestTarget.position);
 
+        if (distanceToNearest > detectionRange)
+        {
+            ChangeState(new IdleState());
+        }
+
+        //alert State Check
         if (distanceToNearest <= detectionRange)
         {
-            radiusRenderer.SetColor(Color.red);
+            ChangeState(new AlertState());
 
+            //attack State Check
             if (Input.GetMouseButtonDown(0)) // Left click
             {
-                //atcakk
+                ChangeState(new AttackState());
             }
         }
     }
@@ -66,7 +93,7 @@ public class AgentAI : MonoBehaviour
 
     public void RotateTowardsTarget()
     {
-        Transform player = this.transform;
+        Transform player = targetObj.transform;
         Vector3 target = FindNearestTarget(gameObject.transform).position;
 
         Vector3 direction = (target - player.position).normalized;
@@ -76,6 +103,8 @@ public class AgentAI : MonoBehaviour
 
     public void FireAtPoint()
     {
+        bulletCount--;
+
         Vector3 targetPoint = FindNearestTarget(gameObject.transform).position;
 
         Vector3 direction = (targetPoint - firePoint.position).normalized;
@@ -89,13 +118,16 @@ public class AgentAI : MonoBehaviour
 
     public void ChangeState(IAgentState newState)
     {
-        currentState?.Exit(this);
-
-        currentState = newState;
+        if (currentState?.GetType() != newState.GetType())
+        {
+            currentState?.Exit(this);
+            currentState = newState;
+        }
         currentState?.Enter(this);
         currentState?.Execute(this);
     }
 
+    /*
     public bool IsTargetNearby()
     {
         bool isNearby = false;
@@ -120,9 +152,13 @@ public class AgentAI : MonoBehaviour
     {
         //АјАн
     }
+    */
 
     public void DestroySelf()
     {
-        //Destroy(gameObject);
+        OnTurretDestroySelfEvent?.Invoke(this.gameObject.transform.position);
+        targetObj.GetComponent<Rigidbody>().useGravity = true;
+        targetObj.GetComponent<BoxCollider>().enabled = true;
+        Destroy(this.gameObject);
     }
 }

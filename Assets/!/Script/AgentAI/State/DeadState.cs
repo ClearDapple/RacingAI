@@ -1,14 +1,13 @@
-using UnityEngine;
 
 public class DeadState : IAgentState
 {
     public void Enter(AgentAI agentAI)
     {
-        agentAI.radiusRenderer.SetColor(Color.gray);
+        agentAI.radiusRenderer.SetColor(new DeadState());
     }
     public void Execute(AgentAI agentAI)
     {
-        //null
+        agentAI.DestroySelf();
     }
     public void Exit(AgentAI agentAI)
     {

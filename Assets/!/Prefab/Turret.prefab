@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2026442937996119842}
   - component: {fileID: 2776838541526489750}
-  - component: {fileID: 1462988685751855937}
+  - component: {fileID: 454598843656321261}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RadiusRenderer
   segments: 100
   radius: 0
---- !u!120 &1462988685751855937
+--- !u!120 &454598843656321261
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -73,7 +73,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f2ab66b9e9a5b4143a3127bae50c1375, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 1067543859733977691}
   - component: {fileID: 5717485224440165399}
   - component: {fileID: 7564963739439103030}
-  - component: {fileID: 2314062387523979043}
+  - component: {fileID: 520225200555156411}
   m_Layer: 0
   m_Name: Engagement
   m_TagString: Turret
@@ -280,7 +280,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2314062387523979043
+--- !u!114 &520225200555156411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,10 +289,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8019704510649834299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2fbf404ef158434eae8df7319933ceb, type: 3}
+  m_Script: {fileID: 11500000, guid: cf03ebb7ff7e44d49b270a063845be77, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Engagement
+  m_EditorClassIdentifier: Assembly-CSharp::AgentAI
   radiusRenderer: {fileID: 2776838541526489750}
+  targetObj: {fileID: 8041829266090992077}
   bulletPrefab: {fileID: 87493999655827006, guid: 838000ebda6504d47a441554ea1c1169, type: 3}
   player: {fileID: 0}
   firePoint: {fileID: 1067543859733977691}
@@ -300,6 +301,7 @@ MonoBehaviour:
   bulletSpeed: 20
   rotationSpeed: 5
   detectionRange: 10
+  bulletCount: 10
 --- !u!1 &8041829266090992077
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +313,8 @@ GameObject:
   - component: {fileID: 1501372950970611672}
   - component: {fileID: 3806673400769504724}
   - component: {fileID: 3436288234775188136}
+  - component: {fileID: 4385673737167091967}
+  - component: {fileID: 4371362484862890451}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Turret
@@ -390,3 +394,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4385673737167091967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8041829266090992077}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4371362484862890451
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8041829266090992077}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
