@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Engagement : MonoBehaviour
 {
+    /*
     [SerializeField] RadiusRenderer radiusRenderer;
 
     public GameObject bulletPrefab;
@@ -83,5 +84,6 @@ public class Engagement : MonoBehaviour
         rb.linearVelocity = direction * bulletSpeed;
 
         Destroy(bullet, 1f);
-    }   
+    }
+    */
 }

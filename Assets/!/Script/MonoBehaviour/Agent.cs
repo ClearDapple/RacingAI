@@ -58,6 +58,22 @@ public class Agent : MonoBehaviour
         orignalPos = transform.position;
     }
 
+    void Update()
+    {
+        if (destination == Vector3.zero) return;
+
+        if (agent.remainingDistance < agent.stoppingDistance)
+        {
+            destination = Vector3.zero;
+            elapsedTime = Time.time - startTime;
+            
+            Debug.Log("µµÂøÇÔ");
+            agentCallbackAction(new Ticket(elapsedTime, this.gameObject.name, sp));
+
+             agent.Warp(orignalPos);
+        }
+    }
+
     public void Setup(float speed, Vector3 des)
     {
         destination = des;
@@ -74,21 +90,5 @@ public class Agent : MonoBehaviour
     public void CheckStartTime()
     {
         startTime = Time.time;
-    }
-
-    void Update()
-    {
-        if (destination == Vector3.zero) return;
-
-        if (agent.remainingDistance < agent.stoppingDistance)
-        {
-            destination = Vector3.zero;
-            elapsedTime = Time.time - startTime;
-            
-            Debug.Log("µµÂøÇÔ");
-            agentCallbackAction(new Ticket(elapsedTime, this.gameObject.name, sp));
-
-             agent.Warp(orignalPos);
-        }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 454598843656321261}
   m_Layer: 0
   m_Name: Line
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +257,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 37a2d1d16fab4d343b32573977173ff6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   fireTarget: {fileID: 0}
   bulletSpeed: 20
   rotationSpeed: 5
-  detectionRange: 10
+  detectionRange: 5
   bulletCount: 10
 --- !u!1 &8041829266090992077
 GameObject:
@@ -371,7 +371,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 682d79c5b5f2c8840a3bcf1364c9277e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

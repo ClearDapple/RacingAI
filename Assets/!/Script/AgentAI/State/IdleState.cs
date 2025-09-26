@@ -3,7 +3,7 @@ public class IdleState : IAgentState
 {
     public void Enter(AgentAI agentAI)
     {
-        agentAI.radiusRenderer.SetColor(new IdleState());
+        //agentAI.radiusRenderer.SetColor(new IdleState());
     }
     public void Execute(AgentAI agentAI)
     {

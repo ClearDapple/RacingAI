@@ -19,7 +19,7 @@ public class AgentAI : MonoBehaviour
     public float bulletSpeed = 20f;
     public float rotationSpeed = 5f;
 
-    public float detectionRange = 10f;
+    public float detectionRange = 5f;
     public int bulletCount = 10;
 
     void Start()
@@ -122,8 +122,9 @@ public class AgentAI : MonoBehaviour
         {
             currentState?.Exit(this);
             currentState = newState;
+            radiusRenderer.SetColor(currentState);
+            currentState?.Enter(this);
         }
-        currentState?.Enter(this);
         currentState?.Execute(this);
     }
 
